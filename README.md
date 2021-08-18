@@ -1,0 +1,1 @@
+# l24_master_data-Akeneo-middleware
