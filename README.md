@@ -1,6 +1,10 @@
 # l24_master_data-Akeneo-middleware
 
-l24_master_data-Akeneo-middleware importiert alle Ihre Daten Ihrer Produkte(texte, Preise, Fotos, ...) von Ihrem Datenbankmanegemntsystem nach Akeneo. Wenn ein Datensatz in einer Tabelle gelöscht wird, wird es in Akeneo deaktiviert und wird nicht gelöscht. Es kann aber auch die Daten aktualisiert werden sowie Wenn der Artikel nicht vorhanden ist, dann soll er neu hinzugefügt werden.
+l24_master_data-Akeneo-middleware importiert alle Ihre Daten Ihrer Produkte(texte, Preise, Fotos, ...) von Ihrem Datenbankmanegemntsystem nach Akeneo. 
+
+Wenn ein Datensatz in einer Tabelle gelöscht wird, wird es in Akeneo deaktiviert und wird nicht gelöscht. 
+
+Es kann aber auch die Daten aktualisiert werden sowie Wenn der Artikel nicht vorhanden ist, dann soll er neu hinzugefügt werden.
     
 # Technologien
 Nodejs ist eine Open-Source-JavaScript-Laufzeitumgebung. Es kann JavaScript-Code außerhalb eines Webbrowers ausführen.
