@@ -1,16 +1,20 @@
 import type {HttpFunction} from '@google-cloud/functions-framework/build/src/functions';
 
-export const l24_master_dataFunc: HttpFunction = (req, res) => {
+export const l24_master_dataFunc: HttpFunction = () => {
+  // include mysql module
   const mysql = require('mysql');
+  // include stream module
   const stream = require('stream');
 
+  // create a connection variable with the required details
   const connection = mysql.createConnection({
-    host: '172.17.0.3',
+    host: '172.17.0.2',
     user: 'root',
     password: 'Start2021',
     database: 'l24_master_data',
   });
 
+  // make to connection to the database
   connection.connect((err: {stack: string}) => {
     if (err) {
       console.error('error connecting: ' + err.stack);
@@ -19,16 +23,17 @@ export const l24_master_dataFunc: HttpFunction = (req, res) => {
     console.log('connected as id ' + connection.threadId);
   });
 
+  // if connection is successful
   connection
-    .query('SELECT * FROM l24_article_master limit 500')
+    .query('SELECT * FROM l24_article_master limit 1')
     .stream()
     .pipe(
       stream
         .Transform({
           objectMode: true,
-          transform: function (data: any, encoding: any, callback: () => void) {
-            // do something with data...
-            console.log(data);
+          transform: function (rows: any, encoding: any, callback: () => void) {
+            console.log(rows);
+
             callback();
           },
         })
@@ -37,37 +42,3 @@ export const l24_master_dataFunc: HttpFunction = (req, res) => {
         })
     );
 };
-
-// SELECT * FROM l24_article_master LIMIT 1
-
-/**
-import type {HttpFunction} from '@google-cloud/functions-framework/build/src/functions';
-
-export const helloWorld: HttpFunction = (req, res) => {
-  const mysql = require('mysql');
-  const connection = mysql.createConnection({
-    host: '172.17.0.2',
-    user: 'root',
-    password: 'Start2021',
-    database: 'l24_master_data',
-  });
-
-  connection.connect((err: {stack: string}) => {
-    if (err) {
-      console.error('error connecting: ' + err.stack);
-      return;
-    }
-    console.log('connected as id ' + connection.threadId);
-  });
-
-  connection.query(
-    'SELECT * FROM l24_article_master LIMIT 1;',
-    (error: any, results: any, fields: any) => {
-      if (error) throw error;
-      console.log(results);
-    }
-  );
-  connection.end();
-};
-
- */
