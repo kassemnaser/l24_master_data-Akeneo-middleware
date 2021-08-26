@@ -42,3 +42,38 @@ export const l24_master_dataFunc: HttpFunction = () => {
         })
     );
 };
+
+/*
+I will need this later
+
+
+const Article = function (this: any, article: any) {
+  this.article_number = article.article_number;
+  this.brand_id = article.brand_id;
+};
+
+Article.findById = (
+  articleId: any,
+  result: (arg0: {kind: string} | null, arg1: null) => void
+) => {
+  connection.query(
+    `SELECT * FROM l24_article_master WHERE id = ${articleId}`,
+    (err: any, res: string | any[]) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+        return;
+      }
+
+      if (res.length) {
+        console.log('found article: ', res[0]);
+        result(null, res[0]);
+        return;
+      }
+
+      // not found Customer with the id
+      result({kind: 'not_found'}, null);
+    }
+  );
+};
+*/
