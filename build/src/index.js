@@ -36,30 +36,30 @@ const l24_master_dataFunc = () => {
         .on('finish', () => {
         console.log('done');
     }));
-    const https = require('http');
-    const data = JSON.stringify({
-        todo: 'buy the article',
-    });
+    const http = require('http');
     const options = {
         hostname: '10.0.55.77',
         port: 8080,
         path: '/api/rest/v1/products',
         header: {
-            'Content-Type': 'applications/json',
-            'Authorization': 'Bearer NzI2MTFlYmVkZGZhNzNhNDE5YTUwMmQxZTI2MDExZjgyZGFiOGYxYjQ3ZTdiY2VjOGZmOWJkYTFmMWY1OTMyZA',
-            'Content-Length': data.length,
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ZWRiZTY0NzY4MmM1NzI2MmE4Yzc4M2NlZTc1M2I1MTBlYTQxNWVhZjdiMmNjOGI3YjczMmYwYjZkMzJiMDZiZA',
         },
         method: 'GET',
     };
-    const req = https.request(options, (res) => {
+    const req = http.request(options, (res) => {
         console.log(`statusCode: ${res.statusCode}`);
         res.on('data', (d) => {
+            //const product = Object.entries(JSON.parse(d));
+            //console.info(product);
             process.stdout.write(d);
         });
     });
-    req.on('error', (error) => {
-        console.error(error);
+    /*
+    req.on('error', (error: string) => {
+      console.error(error);
     });
+  */
     req.end();
 };
 exports.l24_master_dataFunc = l24_master_dataFunc;
