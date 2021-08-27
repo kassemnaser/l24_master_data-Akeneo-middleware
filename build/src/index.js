@@ -55,11 +55,9 @@ const l24_master_dataFunc = () => {
             process.stdout.write(d);
         });
     });
-    /*
-    req.on('error', (error: string) => {
-      console.error(error);
+    req.on('error', (error) => {
+        console.error(error);
     });
-  */
     req.end();
 };
 exports.l24_master_dataFunc = l24_master_dataFunc;

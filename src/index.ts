@@ -70,11 +70,11 @@ export const l24_master_dataFunc: HttpFunction = () => {
       });
     }
   );
-  /*
+
   req.on('error', (error: string) => {
     console.error(error);
   });
-*/
+
   req.end();
 };
 
