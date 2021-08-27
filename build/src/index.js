@@ -36,25 +36,31 @@ const l24_master_dataFunc = () => {
         .on('finish', () => {
         console.log('done');
     }));
-    // connection to Akeneo REST API
-    const http = require('http');
-    const options = {
-        host: '10.0.55.77',
-        port: 8080,
-        path: 'http://10.0.55.77:8080/api/rest/v1/products',
-        content_type: 'applications/json',
-        authorization: 'Bearer N2RhMzRmNDlkY2JhN2E5MDY5OGNiMTE2MDYxMDU5ZjAwZjM5ZGFmNmRlYzI1YTM0MDllNjAwNGUxMWIzZmRkNw',
-    };
-    http
-        .get(options, (res) => {
-        console.log('Got response: ' + res.statusCode);
-        for (const item in res.headers) {
-            console.log(item + ': ' + res.headers[item]);
-        }
-    })
-        .on('error', (e) => {
-        console.log('Got error: ' + e.message);
+    const https = require('http');
+    const data = JSON.stringify({
+        todo: 'buy the article',
     });
+    const options = {
+        hostname: '10.0.55.77',
+        port: 8080,
+        path: '/api/rest/v1/products',
+        header: {
+            'Content-Type': 'applications/json',
+            'Authorization': 'Bearer NzI2MTFlYmVkZGZhNzNhNDE5YTUwMmQxZTI2MDExZjgyZGFiOGYxYjQ3ZTdiY2VjOGZmOWJkYTFmMWY1OTMyZA',
+            'Content-Length': data.length,
+        },
+        method: 'GET',
+    };
+    const req = https.request(options, (res) => {
+        console.log(`statusCode: ${res.statusCode}`);
+        res.on('data', (d) => {
+            process.stdout.write(d);
+        });
+    });
+    req.on('error', (error) => {
+        console.error(error);
+    });
+    req.end();
 };
 exports.l24_master_dataFunc = l24_master_dataFunc;
 /*
