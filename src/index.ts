@@ -8,7 +8,7 @@ export const l24_master_dataFunc: HttpFunction = () => {
 
   // create a connection variable with the required details
   const connection = mysql.createConnection({
-    host: '172.17.0.2',
+    host: '172.17.0.3',
     user: 'root',
     password: 'Start2021',
     database: 'l24_master_data',
@@ -41,6 +41,33 @@ export const l24_master_dataFunc: HttpFunction = () => {
           console.log('done');
         })
     );
+
+  // connection to Akeneo REST API
+  const http = require('http');
+
+  const options = {
+    host: '10.0.55.77',
+    port: 8080,
+    path: 'http://10.0.55.77:8080/api/rest/v1/products',
+    content_type: 'applications/json',
+    authorization:
+      'Bearer N2RhMzRmNDlkY2JhN2E5MDY5OGNiMTE2MDYxMDU5ZjAwZjM5ZGFmNmRlYzI1YTM0MDllNjAwNGUxMWIzZmRkNw',
+  };
+
+  http
+    .get(
+      options,
+      (res: {statusCode: string; headers: {[x: string]: string}}) => {
+        console.log('Got response: ' + res.statusCode);
+
+        for (const item in res.headers) {
+          console.log(item + ': ' + res.headers[item]);
+        }
+      }
+    )
+    .on('error', (e: {message: string}) => {
+      console.log('Got error: ' + e.message);
+    });
 };
 
 /*
