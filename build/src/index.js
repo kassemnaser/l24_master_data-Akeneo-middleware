@@ -2,18 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.l24_master_dataFunc = void 0;
 const l24_master_dataFunc = () => {
-    // include mysql module
-    const mysql = require('mysql');
+    // include dbConnection
+    const connection = require('./dbConnection');
     // include stream module
     const stream = require('stream');
-    // create a connection variable with the required details
-    const connection = mysql.createConnection({
-        host: '172.17.0.3',
-        user: 'root',
-        password: 'Start2021',
-        database: 'l24_master_data',
-    });
-    // make to connection to the database
+    // include akeneoConnection
+    const akeneoConnection = require('./akeneoConnection');
+    // if connection is successful
     connection.connect((err) => {
         if (err) {
             console.error('error connecting: ' + err.stack);
@@ -21,7 +16,7 @@ const l24_master_dataFunc = () => {
         }
         console.log('connected as id ' + connection.threadId);
     });
-    // if connection is successful
+    // select data from l24_master_data
     connection
         .query('SELECT * FROM l24_article_master limit 1')
         .stream()
@@ -36,29 +31,7 @@ const l24_master_dataFunc = () => {
         .on('finish', () => {
         console.log('done');
     }));
-    const http = require('http');
-    const options = {
-        hostname: '10.0.55.77',
-        port: 8080,
-        path: '/api/rest/v1/products',
-        header: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ZWRiZTY0NzY4MmM1NzI2MmE4Yzc4M2NlZTc1M2I1MTBlYTQxNWVhZjdiMmNjOGI3YjczMmYwYjZkMzJiMDZiZA',
-        },
-        method: 'GET',
-    };
-    const req = http.request(options, (res) => {
-        console.log(`statusCode: ${res.statusCode}`);
-        res.on('data', (d) => {
-            //const product = Object.entries(JSON.parse(d));
-            //console.info(product);
-            process.stdout.write(d);
-        });
-    });
-    req.on('error', (error) => {
-        console.error(error);
-    });
-    req.end();
+    console.log(akeneoConnection);
 };
 exports.l24_master_dataFunc = l24_master_dataFunc;
 /*
