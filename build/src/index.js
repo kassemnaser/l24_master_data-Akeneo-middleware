@@ -23,15 +23,17 @@ const l24_master_dataFunc = () => {
         .pipe(stream
         .Transform({
         objectMode: true,
-        transform: function (rows, encoding, callback) {
-            console.log(rows);
+        transform: function (rows, _encoding, callback) {
+            rows.forEach((values) => {
+                console.log(values);
+            });
             callback();
         },
     })
         .on('finish', () => {
         console.log('done');
     }));
-    console.log(akeneoConnection);
+    //console.log(akeneoConnection);
 };
 exports.l24_master_dataFunc = l24_master_dataFunc;
 /*

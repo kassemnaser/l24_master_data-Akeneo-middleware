@@ -26,11 +26,13 @@ export const l24_master_dataFunc: HttpFunction = () => {
         .Transform({
           objectMode: true,
           transform: function (
-            rows: string,
-            encoding: string,
+            rows: any,
+            _encoding: string,
             callback: () => void
           ) {
-            console.log(rows);
+            rows.forEach((element: string) => {
+              console.log(element);
+            });
 
             callback();
           },
@@ -40,7 +42,7 @@ export const l24_master_dataFunc: HttpFunction = () => {
         })
     );
 
-  console.log(akeneoConnection);
+  //console.log(akeneoConnection);
 };
 
 /*
