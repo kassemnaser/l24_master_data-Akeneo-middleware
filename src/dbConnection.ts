@@ -1,5 +1,5 @@
 // include mysql module
-const mysql = require('mysql');
+import mysql = require('mysql');
 
 // create a connection variable with the required details
 const connection = mysql.createConnection({

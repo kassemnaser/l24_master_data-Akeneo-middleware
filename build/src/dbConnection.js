@@ -1,6 +1,7 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // include mysql module
-const mysql = require('mysql');
+const mysql = require("mysql");
 // create a connection variable with the required details
 const connection = mysql.createConnection({
     multipleStatements: true,
