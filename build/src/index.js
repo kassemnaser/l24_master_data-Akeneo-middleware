@@ -1,19 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.l24_master_dataFunc = void 0;
-const l24_master_dataFunc = () => {
+const l24_master_dataFunc = (res, req) => {
     // include dbConnection
     const connection = require('./dbConnection');
     // include akeneoConnection
     const akeneoConnection = require('./akeneoConnection');
-    // select data from l24_master_data and l24_pim_export
-    connection.query('SELECT * FROM l24_article_master LIMIT 1; SELECT * FROM bmw_master_data LIMIT 1', (error, results /*,fields: string*/) => {
+    // select data from l24_pim_export
+    connection.query('SELECT * FROM l24_pim_export LIMIT 1', (error, results /*,fields: string*/) => {
         if (error) {
             throw error;
         }
         results.forEach((rows) => {
             console.log(rows);
-            console.log(akeneoConnection);
+            //console.log(akeneoConnection);
+            //akeneoConnection.send(rows);
         });
         //fields.forEach(rows => console.log(rows));
     });

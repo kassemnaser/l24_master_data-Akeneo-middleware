@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mysql = require("mysql");
 // create a connection variable with the required details
 const connection = mysql.createConnection({
-    multipleStatements: true,
     host: '172.17.0.3',
     user: 'root',
     password: 'Start2021',
