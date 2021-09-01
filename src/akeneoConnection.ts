@@ -9,7 +9,7 @@ const getheaders = {
 const options = {
   host: '10.0.55.77', // here only the domain name
   port: 8080,
-  path: '/api/rest/v1/products/13620748', // the rest of the url with parameters if needed
+  path: '/api/rest/v1/products/1111111132', // the rest of the url with parameters if needed
   headers: getheaders,
   method: 'GET', // do GET
 };
@@ -21,10 +21,8 @@ const req = http.request(
   }) => {
     console.log(`statusCode: ${res.statusCode}`);
     res.on('data', (d: string) => {
-      const obj = Object.entries(JSON.parse(d).values);
-      console.info(obj);
-      //console.log(d);
-      //process.stdout.write(d);
+      const obj = JSON.parse(d).values;
+      console.log(obj);
     });
   }
 );
