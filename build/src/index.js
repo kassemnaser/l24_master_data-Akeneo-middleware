@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.l24_master_dataFunc = void 0;
-const l24_master_dataFunc = (res, req) => {
+const l24_master_dataFunc = (req, res) => {
     // include dbConnection
-    const connection = require('./dbConnection');
+    const mysqlConnection = require('./dbConnection');
     // include akeneoConnection
     const akeneoConnection = require('./akeneoConnection');
     // select data from l24_pim_export
-    connection.query('SELECT * FROM l24_pim_export LIMIT 1', (error, results /*,fields: string*/) => {
+    mysqlConnection.query('SELECT * FROM l24_pim_export LIMIT 1', (error, results /*,fields: string*/) => {
         if (error) {
             throw error;
         }
