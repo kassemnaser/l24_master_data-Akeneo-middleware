@@ -1,7 +1,9 @@
 declare const http: any;
 declare const options: {
     method: string;
-    url: string;
+    host: string | undefined;
+    port: number;
+    path: string;
     headers: {
         Authorization: string;
         'Content-Type': string;
@@ -9,8 +11,7 @@ declare const options: {
     };
     form: {
         grant_type: string | undefined;
-        username: string;
-        password: string;
+        username: string | undefined;
+        password: string | undefined;
     };
 };
-declare const req: any;

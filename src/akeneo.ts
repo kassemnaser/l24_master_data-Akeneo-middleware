@@ -2,15 +2,14 @@ const http = require('http');
 require('dotenv').config();
 //const request = require('request');
 const options = {
-  method: 'GET',
-  host: process.env.host,
-  port: 8080,
+  method: 'POST',
+  host: process.env.HOST,
+  port: process.env.PORT,
   path: '/api/rest/v1/products/',
   headers: {
     'Authorization':
-      'Bearer M2ExN2I5MGNiOGE5YzgzYzNiYzQ3OTQ3YjUzNmY2N2E3ZDI5OTdjYTNjNmMwNDM5ZjJjZGRkYzg1MTlmMDUzNg',
+      'Bearer Y2U2MGU0ZGQ4NjAxMWJmNWM2MWY5ZmIzYjM5MTVhMTY1ZjlmN2RlMGU0ZDFlOWMyNDlhNmJjMjk3Njk0NzhmNg',
     'Content-Type': 'application/x-www-form-urlencoded',
-    Cookie: 'BAPID=ej4k1m2mv5i9frfvrc05l9v5pj',
   },
   form: {
     grant_type: process.env.grant_type,
@@ -18,9 +17,8 @@ const options = {
     password: process.env.password,
   },
 };
-const req = http.request(options, (error: any, response: any) => {
+http.request(options, (error: any, response: any) => {
   if (error) throw new Error(error);
-  console.log(response.body);
+  console.log('response.body');
 });
-
-module.exports = req;
+module.exports = http;
