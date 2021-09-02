@@ -5,9 +5,9 @@ const l24_master_dataFunc = (req, res) => {
     // include dbConnection
     const mysqlConnection = require('./dbConnection');
     // include akeneoConnection
-    require('./akeneoConnection');
+    require('./akeneo');
     // select data from l24_pim_export
-    mysqlConnection.query('SELECT * FROM l24_pim_export LIMIT 1', (error, results /*,fields: string*/) => {
+    mysqlConnection.query('SELECT * FROM l24_pim_export WHERE l24_sku = "BSH-0 001 106 027"', (error, results /*,fields: string*/) => {
         if (error) {
             throw error;
         }

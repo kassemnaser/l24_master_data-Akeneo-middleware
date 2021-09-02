@@ -1,17 +1,18 @@
+/*
 const http = require('http');
 
 const getheaders = {
   'Content-Type': 'application/json',
   // eslint-disable-next-line prettier/prettier
-  'Authorization': 'Bearer YTUxZTE3OGI1NzE4YTQ1ZTVhNDYyMTgxMDQ5ZDQ0YjBiZGU5MzIxMDYwOTlhOWRkZWI1M2MzNjQ1MzZjNGRlYg',
+  'Authorization': 'Bearer ODU1NWUyNjY0NTJmN2YzMDMxZmEwNGUxNzgyOWE2ZjIzZTM5ZjVjZWM2MGMzNzM5NDliMzcyMTVhM2E1ZjQ3MA',
 };
 
 const options = {
-  host: '10.0.55.77', // here only the domain name
+  host: '10.0.55.77',
   port: 8080,
-  path: '/api/rest/v1/products/1111111132', // the rest of the url with parameters if needed
+  path: '/api/rest/v1/products/15554974',
   headers: getheaders,
-  method: 'GET', // do GET
+  method: 'GET',
 };
 const req = http.request(
   options,
@@ -21,7 +22,7 @@ const req = http.request(
   }) => {
     console.log(`statusCode: ${res.statusCode}`);
     res.on('data', (d: string) => {
-      const obj = JSON.parse(d).values;
+      const obj = JSON.parse(d);
       console.log(obj);
     });
   }
@@ -31,4 +32,6 @@ req.on('error', (e: object) => {
   console.error(e);
 });
 req.end();
+
 module.exports = req;
+*/
