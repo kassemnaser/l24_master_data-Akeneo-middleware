@@ -1,7 +1,7 @@
-"use strict";
 // import btoa = require('btoa');
 // import fetch from 'node-fetch';
 // const tokenRefresh = require('./authenticate');
+
 // async function authenticate() {
 //   const json = await fetch(
 //     'http://' +
@@ -35,6 +35,7 @@
 //     .catch(err => {
 //       console.error(err);
 //     });
+
 //   if (json !== false) {
 //     json.access_token;
 //     json.refresh_token;
@@ -46,5 +47,5 @@
 //     return false;
 //   }
 // }
+
 // module.exports = authenticate();
-//# sourceMappingURL=akeneo.js.map

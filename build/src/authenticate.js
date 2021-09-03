@@ -24,8 +24,8 @@ function generateAccessToken() {
     request(options, (error, response) => {
         if (error)
             throw error;
-        const formattedString = response.body.split(',').join('\n');
-        console.log(formattedString);
+        response.body.split(',').join('\n');
+        //console.log(formattedString);
     });
 }
 const accessToke = generateAccessToken();

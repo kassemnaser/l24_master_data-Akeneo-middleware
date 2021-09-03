@@ -5,6 +5,7 @@ export const l24_master_dataFunc: HttpFunction = (req, res) => {
   require('./dbConnection');
 
   // include akeneoConnection
-  require('./authenticate');
-  require('./akeneoConnection');
+  //require('./authenticate');
+  //require('./akeneoConnection');
+  //const akeneo = require('./akeneo');
 };

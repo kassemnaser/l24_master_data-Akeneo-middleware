@@ -5,8 +5,10 @@ const l24_master_dataFunc = (req, res) => {
     // include dbConnection
     require('./dbConnection');
     // include akeneoConnection
-    require('./authenticate');
-    require('./akeneoConnection');
+    //require('./authenticate');
+    //require('./akeneoConnection');
+    const akeneo = require('./akeneo');
+    console.log(akeneo);
 };
 exports.l24_master_dataFunc = l24_master_dataFunc;
 //# sourceMappingURL=index.js.map
