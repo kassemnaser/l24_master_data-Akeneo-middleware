@@ -1,13 +1,12 @@
-/*
 const http = require('http');
 
 const getheaders = {
   'Content-Type': 'application/json',
   // eslint-disable-next-line prettier/prettier
-  'Authorization': 'Bearer ODU1NWUyNjY0NTJmN2YzMDMxZmEwNGUxNzgyOWE2ZjIzZTM5ZjVjZWM2MGMzNzM5NDliMzcyMTVhM2E1ZjQ3MA',
+  'Authorization': 'Bearer Y2JmMzc3YTdiMDkxZjY1NTViMzU3N2E5ODAwNWZiYTgxZTg3ZTc2NjM2YmY5ZmU0Nzg5MTc5MmNlMmU2MzVhNg',
 };
 
-const options = {
+const options1 = {
   host: '10.0.55.77',
   port: 8080,
   path: '/api/rest/v1/products/15554974',
@@ -15,7 +14,7 @@ const options = {
   method: 'GET',
 };
 const req = http.request(
-  options,
+  options1,
   (res: {
     statusCode: string;
     on: (arg0: string, arg1: (d: string) => void) => void;
@@ -34,4 +33,3 @@ req.on('error', (e: object) => {
 req.end();
 
 module.exports = req;
-*/

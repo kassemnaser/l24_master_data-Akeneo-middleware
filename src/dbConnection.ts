@@ -18,4 +18,17 @@ connection.connect((err: {stack: string}) => {
   console.log('connected as id ' + connection.threadId);
 });
 
+// select data from l24_pim_export
+connection.query(
+  'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1',
+  (error: string, results: string[] /*,fields: string*/) => {
+    if (error) {
+      throw error;
+    }
+    results.forEach((rows: string) => {
+      console.log(rows);
+    });
+  }
+);
+
 module.exports = connection;
