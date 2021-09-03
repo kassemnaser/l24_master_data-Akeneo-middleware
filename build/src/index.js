@@ -5,7 +5,7 @@ const l24_master_dataFunc = (req, res) => {
     // include dbConnection
     const mysqlConnection = require('./dbConnection');
     // include akeneoConnection
-    require('./akeneo');
+    require('./authenticate');
     // select data from l24_pim_export
     mysqlConnection.query('SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1', (error, results /*,fields: string*/) => {
         if (error) {

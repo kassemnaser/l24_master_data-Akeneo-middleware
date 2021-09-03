@@ -42,6 +42,7 @@
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
     "openid-client": "^4.7.5",
-    "querystring": "^0.2.1"
+    "querystring": "^0.2.1",
+    "request": "^2.88.2"
   }
 }

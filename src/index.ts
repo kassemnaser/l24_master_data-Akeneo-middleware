@@ -5,7 +5,7 @@ export const l24_master_dataFunc: HttpFunction = (req, res) => {
   const mysqlConnection = require('./dbConnection');
 
   // include akeneoConnection
-  require('./akeneo');
+  require('./authenticate');
 
   // select data from l24_pim_export
   mysqlConnection.query(
