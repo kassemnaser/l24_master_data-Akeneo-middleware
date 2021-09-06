@@ -1,34 +1,45 @@
-// include mysql module
-import mysql = require('mysql');
-
-// create a connection variable with the required details
-const connection = mysql.createConnection({
-  host: '172.17.0.3',
-  user: 'root',
-  password: 'Start2021',
-  database: 'l24_master_data',
-});
-
-// if connection is successful
-connection.connect((err: {stack: string}) => {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-  console.log('connected as id ' + connection.threadId);
-});
-
-// select data from l24_pim_export
-connection.query(
-  'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1',
-  (error: string, results: string[] /*,fields: string*/) => {
-    if (error) {
-      throw error;
-    }
-    results.forEach((rows: string) => {
-      console.log(rows);
+const mysql = require('mysql');
+class DB {
+  conn: any;
+  // create a connection variable with the required details
+  constructor() {
+    this.conn = mysql.createConnection({
+      host: '172.17.0.3',
+      user: 'root',
+      password: 'Start2021',
+      database: 'l24_master_data',
     });
   }
-);
 
-module.exports = connection;
+  connect() {
+    this.conn.connect((err: Error) => {
+      if (err) {
+        console.log('Connection failed!!! Error:');
+        throw err;
+      } else {
+        console.log('Database connection established.');
+      }
+    });
+  }
+
+  // select data from l24_pim_export
+  readData() {
+    this.conn.query(
+      'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1',
+      (err: Error, results: string[]) => {
+        if (err) throw err;
+        else console.log('Selected ' + results.length + ' row(s).');
+        for (let i = 0; i < results.length; i++) {
+          console.log(results[i]);
+        }
+        console.log('Done.');
+      }
+    );
+    this.conn.end((err: Error) => {
+      if (err) throw err;
+      else console.log('Closing connection.');
+    });
+  }
+}
+
+module.exports = DB;
