@@ -1,51 +1,46 @@
-// import btoa = require('btoa');
-// import fetch from 'node-fetch';
-// const tokenRefresh = require('./authenticate');
+require('dotenv').config();
+const request = require('request');
 
-// async function authenticate() {
-//   const json = await fetch(
-//     'http://' +
-//       process.env.HOST +
-//       ':' +
-//       process.env.PORT +
-//       '/api/oauth/v1/token',
-//     {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         // eslint-disable-next-line prettier/prettier
-//         'Authorization':
-//           'Basic ' + btoa(process.env.CLIENT_ID + ':' + process.env.SECRET),
-//       },
-//       body: JSON.stringify({
-//         grant_type: process.env.GRANT_TYPE,
-//         username: process.env.USERNAME,
-//         password: process.env.PASSWORD,
-//       }),
-//     }
-//   )
-//     .then(res => {
-//       if (res.status === 200) {
-//         return res.json();
-//       } else {
-//         console.error(`Request returned status "${res.status}"`);
-//         return false;
-//       }
-//     })
-//     .catch(err => {
-//       console.error(err);
-//     });
+class Akeneo {
+  expiresAt = 0;
+  expires_in = false;
+  constructor(expiresAt: number) {
+    this.expiresAt = expiresAt;
+  }
 
-//   if (json !== false) {
-//     json.access_token;
-//     json.refresh_token;
-//     Date.now() + json.expires_in * 1000;
-//     console.debug('OAuth authentication successful');
-//     return true;
-//   } else {
-//     console.debug('OAuth authentication failed');
-//     return false;
-//   }
-// }
+  async connect() {
+    if (this.expiresAt > Date.now()) {
+      await this.authenticate();
+    }
+  }
 
-// module.exports = authenticate();
+  async authenticate() {
+    const options = {
+      method: 'POST',
+      url:
+        'http://' +
+        process.env.HOST +
+        ':' +
+        process.env.PORT +
+        '/api/oauth/v1/token',
+      headers: {
+        'Content-Type': 'application',
+        // eslint-disable-next-line prettier/prettier
+        'Authorization': 'Basic OF80MjFqcDFvMjZ0a3djODBnczAwMGdjZ2tjNG9rOHcwZ2tnd3M0MGc0Z2NzMHM4Y293dzoxYXVjYzJmb21oeGN3Z29vdzhjNDg0b2NjNGdzZ2dnc3djazA4NDQ4dzRjc2NjODA0Zw==',
+      },
+      form: {
+        grant_type: process.env.GRANT_TYPE,
+        username: process.env.USERNAME,
+        password: process.env.PASSWORD,
+      },
+    };
+
+    request(options, (error: Error, response: any) => {
+      if (error) throw error;
+      const access_token = Object.entries(JSON.parse(response.body));
+      console.info(access_token[0][1]);
+    });
+  }
+}
+
+module.exports = Akeneo;
