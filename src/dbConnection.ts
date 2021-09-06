@@ -11,6 +11,7 @@ class DB {
     });
   }
 
+  // if the connection is successful
   connect() {
     this.conn.connect((err: Error) => {
       if (err) {

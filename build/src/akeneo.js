@@ -1,11 +1,9 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 const request = require('request');
 class Akeneo {
     constructor(expiresAt) {
         this.expiresAt = 0;
-        this.expires_in = false;
         this.expiresAt = expiresAt;
     }
     async connect() {
@@ -14,7 +12,7 @@ class Akeneo {
         }
     }
     async authenticate() {
-        const json = {
+        const options = {
             method: 'POST',
             url: 'http://' +
                 process.env.HOST +
@@ -32,11 +30,13 @@ class Akeneo {
                 password: process.env.PASSWORD,
             },
         };
-        request(json, (error, response) => {
+        request(options, (error, response) => {
             if (error)
                 throw error;
-            const access_token = Object.entries(JSON.parse(response.body));
-            console.info(access_token[0][1]);
+            // const access_token = Object.entries(JSON.parse(response.body));
+            // console.info(access_token[0][1]);
+            console.log(response.body);
+            this.expiresAt = Date.now() + 60 * 1000;
         });
     }
 }

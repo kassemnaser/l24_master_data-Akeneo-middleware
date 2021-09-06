@@ -10,6 +10,7 @@ class DB {
             database: 'l24_master_data',
         });
     }
+    // if the connection is successful
     connect() {
         this.conn.connect((err) => {
             if (err) {
