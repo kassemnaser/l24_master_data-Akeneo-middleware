@@ -35,9 +35,11 @@
   },
   "dependencies": {
     "@google-cloud/functions-framework": "^1.9.0",
+    "boa": "0.0.1",
     "btoa": "^1.2.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "http": "0.0.1-security",
     "http-errors": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
