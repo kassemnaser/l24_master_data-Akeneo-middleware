@@ -1,25 +1,25 @@
-import {response} from "express";
+//import {response} from "express";
 import fetch from "node-fetch";
 import btoa = require("btoa");
-import { stringify } from 'query-string';
+//import { stringify } from 'query-string';
 
 const http = require('http');
 
 require('dotenv').config();
-const request = require('request');
+//const request = require('request');
 
 class Akeneo {
-  endpoints = ['products', 'categories'];
+
   expiresAt = 0;
-  public token = null;
-  public refreshToken = null;
+  public token = '';
+  public refreshToken = '';
 
   constructor(expiresAt: number, token: any, refreshToken: any) {
-    console.log(this.authenticate());
+    console.log('akkkkkkkkkkkenoooooooo' + this.authenticate());
     this.expiresAt = expiresAt;
     this.refreshToken = refreshToken;
     this.token = token;
-    console.log(this.token);
+    //console.log(this.token);
   }
 
   async connect() {
@@ -42,6 +42,7 @@ class Akeneo {
       }),
     }).then((res) => {
       if (res.status == 200) {
+        //console.log('tooooooooooooooooken: ' + this.token);
         return res.json();
       } else {
         console.error(`Request returned status "${res.status}"`)
@@ -54,6 +55,7 @@ class Akeneo {
 
     if (options !== false) {
       this.token = options.access_token;
+      console.log(this.token);
       this.refreshToken = options.refresh_token;
       this.expiresAt = Date.now() + options.expires_in * 1000;
       console.debug('OAuth authentication successful')
