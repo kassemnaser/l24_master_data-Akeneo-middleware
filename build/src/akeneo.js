@@ -33,9 +33,9 @@ class Akeneo {
         request(options, (error, response) => {
             if (error)
                 throw error;
-            // const access_token = Object.entries(JSON.parse(response.body));
-            // console.info(access_token[0][1]);
-            console.log(response.body);
+            const access_token = Object.entries(JSON.parse(response.body));
+            console.info(access_token[0][1]);
+            //console.log(response.body);
             this.expiresAt = Date.now() + 60 * 1000;
         });
     }

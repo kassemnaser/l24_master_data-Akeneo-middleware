@@ -25,20 +25,24 @@ class DB {
     // select data from l24_pim_export
     readData() {
         this.conn.query('SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1', (err, results) => {
-            if (err)
+            if (err) {
                 throw err;
-            else
-                console.log('Selected ' + results.length + ' row(s).');
-            for (let i = 0; i < results.length; i++) {
-                console.log(results[i]);
             }
-            console.log('Done.');
+            else {
+                console.log('Selected ' + results.length + ' row(s).');
+                for (let i = 0; i < results.length; i++) {
+                    console.log(results[i]);
+                }
+                console.log('Done.');
+            }
         });
         this.conn.end((err) => {
-            if (err)
+            if (err) {
                 throw err;
-            else
+            }
+            else {
                 console.log('Closing connection.');
+            }
         });
     }
 }

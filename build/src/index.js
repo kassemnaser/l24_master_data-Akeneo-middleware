@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.l24_master_dataFunc = void 0;
 const l24_master_dataFunc = (req, res) => {
+    res.send('Hello, World');
     // include dbConnection
     const DB = require('./dbConnection');
     const myDB = new DB();

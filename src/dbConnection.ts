@@ -28,17 +28,23 @@ class DB {
     this.conn.query(
       'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1',
       (err: Error, results: string[]) => {
-        if (err) throw err;
-        else console.log('Selected ' + results.length + ' row(s).');
-        for (let i = 0; i < results.length; i++) {
-          console.log(results[i]);
+        if (err) {
+          throw err;
+        } else {
+          console.log('Selected ' + results.length + ' row(s).');
+          for (let i = 0; i < results.length; i++) {
+            console.log(results[i]);
+          }
+          console.log('Done.');
         }
-        console.log('Done.');
       }
     );
     this.conn.end((err: Error) => {
-      if (err) throw err;
-      else console.log('Closing connection.');
+      if (err) {
+        throw err;
+      } else {
+        console.log('Closing connection.');
+      }
     });
   }
 }
