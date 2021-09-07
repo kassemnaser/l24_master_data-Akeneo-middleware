@@ -4,6 +4,7 @@ const request = require('request');
 class Akeneo {
     constructor(expiresAt) {
         this.expiresAt = 0;
+        this.accessToken = '';
         this.expiresAt = expiresAt;
     }
     async connect() {

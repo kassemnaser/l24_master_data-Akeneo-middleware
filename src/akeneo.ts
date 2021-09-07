@@ -17,12 +17,7 @@ class Akeneo {
   async authenticate() {
     const options = {
       method: 'POST',
-      url:
-        'http://' +
-        process.env.HOST +
-        ':' +
-        process.env.PORT +
-        '/api/oauth/v1/token',
+      url: 'https://' + process.env.HOST + ':' + process.env.PORT + '/api/oauth/v1/token',
       headers: {
         'Content-Type': 'application',
         // eslint-disable-next-line prettier/prettier
