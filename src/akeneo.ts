@@ -14,7 +14,8 @@ class Akeneo {
     this.expiresAt = expiresAt;
     this.refreshToken = refreshToken;
     this.token = token;
-    console.log(this.token);
+    //this.getData();
+    //console.log(this.token);
   }
 /*
   async connect() {
@@ -39,7 +40,6 @@ class Akeneo {
       }),
     }).then((response) => {
       if (response.status == 200) {
-        console.log('tooooooooooooooooken: ' + this.token);
         return response.json();
       } else {
         console.error(`Request returned status "${response.status}"`)
@@ -59,25 +59,8 @@ class Akeneo {
     } else {
       console.debug('Authentication failed');
     }
-
-
-    /*
-     request(options, (error: Error, response: any) => {
-      if (error) throw error;
-      // access_token
-      const access_token = Object.entries(JSON.parse(response.body));
-      return access_token[0][1];
-
-      // refresh_token
-      //const refresh_token = Object.entries(JSON.parse(response.body));
-      //this.refreshToken = refresh_token[4][1];
-      //console.log(response.body);
-      //this.refreshToken = JSON.parse(response.body);
-      //this.expiresAt = Date.now() + 60 * 1000;
-      //console.log('done');
-    });*/
   }
-/*
+
   getData() {
     const option = {
       method: 'GET',
@@ -93,15 +76,14 @@ class Akeneo {
     const req = http.request(option, (res: any) => {
       console.log(`statusCode: ${res.statusCode}`)
       res.on('data', (d: any) => {
-        //const obj = Object.entries(JSON.parse(d).values.Translate1[0])
-        console.info(d.toString('utf8'));
+        console.log(d);
       })
     })
     req.on('error', (error: Error) => {
       console.error(error)
     })
     req.end();
-  }*/
+  }
 }
 
 module.exports = Akeneo;

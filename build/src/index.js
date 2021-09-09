@@ -9,7 +9,7 @@ const l24_master_dataFunc = (req, res) => {
     //myDB.readData();
     const Akeneo = require('./akeneo');
     const client = new Akeneo();
-    //client.getData();
+    client.getData();
 };
 exports.l24_master_dataFunc = l24_master_dataFunc;
 //# sourceMappingURL=index.js.map

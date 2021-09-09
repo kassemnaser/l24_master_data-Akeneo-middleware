@@ -9,5 +9,5 @@ export const l24_master_dataFunc: HttpFunction = (req, res) => {
 
   const Akeneo = require('./akeneo');
   const client = new Akeneo();
-  //client.getData();
+  client.getData();
 };
