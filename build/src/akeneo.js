@@ -1,33 +1,32 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//import {response} from "express";
 const node_fetch_1 = require("node-fetch");
 const btoa = require("btoa");
-//import { stringify } from 'query-string';
 const http = require('http');
 require('dotenv').config();
-//const request = require('request');
 class Akeneo {
     constructor(expiresAt, token, refreshToken) {
         this.expiresAt = 0;
         this.token = '';
         this.refreshToken = '';
-        console.log('akkkkkkkkkkkenoooooooo' + this.authenticate());
+        console.log(this.authenticate());
         this.expiresAt = expiresAt;
         this.refreshToken = refreshToken;
         this.token = token;
-        //console.log(this.token);
+        console.log(this.token);
     }
-    async connect() {
+    /*
+      async connect() {
         if (this.expiresAt > Date.now()) {
-            await this.authenticate();
+          await this.authenticate();
         }
-    }
+      }
+      */
     async authenticate() {
         const options = await node_fetch_1.default('http://' + process.env.HOST + ':' + process.env.PORT + '/api/oauth/v1/token', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8',
                 'Authorization': 'Basic ' + btoa(process.env.CLIENT_ID + ':' + process.env.SECRET),
             },
             body: JSON.stringify({
@@ -35,13 +34,13 @@ class Akeneo {
                 username: process.env.USERNAME,
                 password: process.env.PASSWORD,
             }),
-        }).then((res) => {
-            if (res.status == 200) {
-                //console.log('tooooooooooooooooken: ' + this.token);
-                return res.json();
+        }).then((response) => {
+            if (response.status == 200) {
+                console.log('tooooooooooooooooken: ' + this.token);
+                return response.json();
             }
             else {
-                console.error(`Request returned status "${res.status}"`);
+                console.error(`Request returned status "${response.status}"`);
                 return false;
             }
         }).catch((err) => {
@@ -53,10 +52,10 @@ class Akeneo {
             console.log(this.token);
             this.refreshToken = options.refresh_token;
             this.expiresAt = Date.now() + options.expires_in * 1000;
-            console.debug('OAuth authentication successful');
+            console.debug('Authentication successful');
         }
         else {
-            console.debug('OAuth authentication failed');
+            console.debug('Authentication failed');
         }
         /*
          request(options, (error: Error, response: any) => {
@@ -73,31 +72,6 @@ class Akeneo {
           //this.expiresAt = Date.now() + 60 * 1000;
           //console.log('done');
         });*/
-    }
-    getData() {
-        const option = {
-            method: 'GET',
-            host: '10.0.55.77',
-            port: 8080,
-            url: '/api/rest/v1/products/83300000058',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.token,
-            },
-        };
-        console.log(this.token);
-        const req = http.request(option, (res) => {
-            console.log(`statusCode: ${res.statusCode}`);
-            console.log('teeeeeeeeeeeeeeeeest');
-            res.on('data', (d) => {
-                //const obj = Object.entries(JSON.parse(d).values.Translate1[0])
-                console.info(d.toString('utf8'));
-            });
-        });
-        req.on('error', (error) => {
-            console.error(error);
-        });
-        req.end();
     }
 }
 module.exports = Akeneo;
