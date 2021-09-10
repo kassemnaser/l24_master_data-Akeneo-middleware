@@ -7,7 +7,8 @@ export const l24_master_dataFunc: HttpFunction = (req, res) => {
   //const myDB = new DB();
   //myDB.readData();
 
-  const Akeneo = require('./akeneo');
-  const client = new Akeneo();
-  client.getData();
+  //const Akeneo = require('./akeneo');
+  //const client = new Akeneo();
+  //client.getData();
+  const token = require('./token')
 };

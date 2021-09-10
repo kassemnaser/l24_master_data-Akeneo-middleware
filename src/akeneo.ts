@@ -30,7 +30,7 @@ class Akeneo {
     const options = await fetch('http://' + process.env.HOST + ':' + process.env.PORT + '/api/oauth/v1/token',{
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
+        'Content-Type': 'application/json',
         'Authorization': 'Basic ' + btoa(process.env.CLIENT_ID + ':' + process.env.SECRET),
       },
       body: JSON.stringify({
@@ -60,7 +60,7 @@ class Akeneo {
       console.debug('Authentication failed');
     }
   }
-
+/*
   getData() {
     const option = {
       method: 'GET',
@@ -83,7 +83,7 @@ class Akeneo {
       console.error(error)
     })
     req.end();
-  }
+  }*/
 }
 
 module.exports = Akeneo;

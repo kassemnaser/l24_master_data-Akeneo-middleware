@@ -7,9 +7,10 @@ const l24_master_dataFunc = (req, res) => {
     //const DB = require('./dbConnection');
     //const myDB = new DB();
     //myDB.readData();
-    const Akeneo = require('./akeneo');
-    const client = new Akeneo();
-    client.getData();
+    //const Akeneo = require('./akeneo');
+    //const client = new Akeneo();
+    //client.getData();
+    const token = require('./token');
 };
 exports.l24_master_dataFunc = l24_master_dataFunc;
 //# sourceMappingURL=index.js.map

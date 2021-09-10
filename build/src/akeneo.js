@@ -9,7 +9,7 @@ class Akeneo {
         this.expiresAt = 0;
         this.token = '';
         this.refreshToken = '';
-        //console.log(this.authenticate());
+        console.log(this.authenticate());
         this.expiresAt = expiresAt;
         this.refreshToken = refreshToken;
         this.token = token;
@@ -27,7 +27,7 @@ class Akeneo {
         const options = await node_fetch_1.default('http://' + process.env.HOST + ':' + process.env.PORT + '/api/oauth/v1/token', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json;charset=UTF-8',
+                'Content-Type': 'application/json',
                 'Authorization': 'Basic ' + btoa(process.env.CLIENT_ID + ':' + process.env.SECRET),
             },
             body: JSON.stringify({
@@ -57,29 +57,6 @@ class Akeneo {
         else {
             console.debug('Authentication failed');
         }
-    }
-    getData() {
-        const option = {
-            method: 'GET',
-            host: '10.0.55.77',
-            port: 8080,
-            url: '/api/rest/v1/products/83300000058',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.token,
-            },
-        };
-        console.log(this.token);
-        const req = http.request(option, (res) => {
-            console.log(`statusCode: ${res.statusCode}`);
-            res.on('data', (d) => {
-                console.log(d);
-            });
-        });
-        req.on('error', (error) => {
-            console.error(error);
-        });
-        req.end();
     }
 }
 module.exports = Akeneo;

@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@google-cloud/functions-framework": "^1.9.0",
+    "axios": "^0.21.4",
     "boa": "0.0.1",
     "btoa": "^1.2.1",
     "dotenv": "^10.0.0",
