@@ -7,22 +7,14 @@ require('dotenv').config();
 class Akeneo {
     constructor(expiresAt, token, refreshToken) {
         this.expiresAt = 0;
-        this.token = '';
         this.refreshToken = '';
-        console.log(this.authenticate());
+        //console.log(this.authenticate());
         this.expiresAt = expiresAt;
         this.refreshToken = refreshToken;
-        this.token = token;
+        this.accessToken = token;
         //this.getData();
         //console.log(this.token);
     }
-    /*
-      async connect() {
-        if (this.expiresAt > Date.now()) {
-          await this.authenticate();
-        }
-      }
-      */
     async authenticate() {
         const options = await node_fetch_1.default('http://' + process.env.HOST + ':' + process.env.PORT + '/api/oauth/v1/token', {
             method: 'POST',
@@ -48,8 +40,8 @@ class Akeneo {
             return false;
         });
         if (options !== false) {
-            this.token = options.access_token;
-            console.log(this.token);
+            this.accessToken = options.access_token;
+            console.log(this.accessToken);
             this.refreshToken = options.refresh_token;
             this.expiresAt = Date.now() + options.expires_in * 1000;
             console.debug('Authentication successful');
@@ -57,6 +49,29 @@ class Akeneo {
         else {
             console.debug('Authentication failed');
         }
+    }
+    getData() {
+        const option = {
+            method: 'GET',
+            host: '10.0.55.77',
+            port: 8080,
+            url: '/api/rest/v1/products/83300000058',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.accessToken,
+            },
+        };
+        console.log(this.accessToken);
+        const req = http.request(option, (res) => {
+            console.log(`statusCode: ${res.statusCode}`);
+            res.on('data', (d) => {
+                console.log(d);
+            });
+        });
+        req.on('error', (error) => {
+            console.error(error);
+        });
+        req.end();
     }
 }
 module.exports = Akeneo;

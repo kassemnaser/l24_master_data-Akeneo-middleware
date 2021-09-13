@@ -1,19 +1,20 @@
 const mysql = require('mysql');
+const dbConfig = require('./config/db.config.js');
 class DB {
-  conn: any;
+  dbConnection: any;
   // create a connection variable with the required details
   constructor() {
-    this.conn = mysql.createConnection({
-      host: '172.17.0.3',
-      user: 'root',
-      password: 'Start2021',
-      database: 'l24_master_data',
+    this.dbConnection = mysql.createConnection({
+      host: dbConfig.HOST,
+      user: dbConfig.USER,
+      password: dbConfig.PASSWORD,
+      database: dbConfig.DATABASE,
     });
   }
 
   // if the connection is successful
-  connect() {
-    this.conn.connect((err: Error) => {
+  public dbConnect() {
+    this.dbConnection.connect((err: Error) => {
       if (err) {
         console.log('Connection failed!!! Error:');
         throw err;
@@ -24,8 +25,8 @@ class DB {
   }
 
   // select data from l24_pim_export
-  readData() {
-    this.conn.query(
+  readArticles() {
+    this.dbConnection.query(
       'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1',
       (err: Error, results: string[]) => {
         if (err) {
@@ -39,7 +40,7 @@ class DB {
         }
       }
     );
-    this.conn.end((err: Error) => {
+    this.dbConnection.end((err: Error) => {
       if (err) {
         throw err;
       } else {

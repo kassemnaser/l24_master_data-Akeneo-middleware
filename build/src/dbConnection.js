@@ -1,13 +1,14 @@
 "use strict";
 const mysql = require('mysql');
+const dbConfig = require('./config/db.config.js');
 class DB {
     // create a connection variable with the required details
     constructor() {
         this.conn = mysql.createConnection({
-            host: '172.17.0.3',
-            user: 'root',
-            password: 'Start2021',
-            database: 'l24_master_data',
+            host: dbConfig.HOST,
+            user: dbConfig.USER,
+            password: dbConfig.PASSWORD,
+            database: dbConfig.DATABASE,
         });
     }
     // if the connection is successful

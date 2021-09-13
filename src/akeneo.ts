@@ -5,27 +5,20 @@ require('dotenv').config();
 
 class Akeneo {
 
-  expiresAt = 0;
-  public token = '';
-  public refreshToken = '';
+  private expiresAt = 0;
+  private accessToken: string;
+  private refreshToken = '';
 
   constructor(expiresAt: number, token: any, refreshToken: any) {
-    console.log(this.authenticate());
+    //console.log(this.authenticate());
     this.expiresAt = expiresAt;
     this.refreshToken = refreshToken;
-    this.token = token;
+    this.accessToken = token;
     //this.getData();
     //console.log(this.token);
   }
-/*
-  async connect() {
-    if (this.expiresAt > Date.now()) {
-      await this.authenticate();
-    }
-  }
-  */
 
-  async authenticate() {
+  private async authenticate() {
 
     const options = await fetch('http://' + process.env.HOST + ':' + process.env.PORT + '/api/oauth/v1/token',{
       method: 'POST',
@@ -51,8 +44,8 @@ class Akeneo {
     });
 
     if (options !== false) {
-      this.token = options.access_token;
-      console.log(this.token);
+      this.accessToken = options.access_token;
+      console.log(this.accessToken);
       this.refreshToken = options.refresh_token;
       this.expiresAt = Date.now() + options.expires_in * 1000;
       console.debug('Authentication successful');
@@ -60,7 +53,7 @@ class Akeneo {
       console.debug('Authentication failed');
     }
   }
-/*
+
   getData() {
     const option = {
       method: 'GET',
@@ -69,10 +62,10 @@ class Akeneo {
       url: '/api/rest/v1/products/83300000058',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.token,
+        'Authorization': 'Bearer ' + this.accessToken,
       },
     };
-    console.log(this.token);
+    console.log(this.accessToken);
     const req = http.request(option, (res: any) => {
       console.log(`statusCode: ${res.statusCode}`)
       res.on('data', (d: any) => {
@@ -83,7 +76,7 @@ class Akeneo {
       console.error(error)
     })
     req.end();
-  }*/
+  }
 }
 
 module.exports = Akeneo;
