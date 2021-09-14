@@ -4,6 +4,7 @@ const node_fetch_1 = require("node-fetch");
 const btoa = require("btoa");
 const http = require('http');
 require('dotenv').config();
+const articles = require('./retrieveAllArticles');
 class Akeneo {
     constructor(expiresAt, accessToken, refreshToken) {
         this.expiresAt = 0;
@@ -52,21 +53,17 @@ class Akeneo {
     }
     importProducts() {
         const option = {
-            method: 'POST',
+            method: 'GET',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer OGI3MWQ4ZDRmNzExZGIyNjQxZmY0ZDM1YjVhNDNkZjU3ZjIxODQzNGM3Y2FlNWE3YTEzNDQwOGM0ZDFiNzQzYw',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.accessToken,
             },
-            body: JSON.stringify({
-                grant_type: process.env.GRANT_TYPE,
-                username: process.env.USERNAME,
-                password: process.env.PASSWORD,
-            }),
         };
         node_fetch_1.default("http://10.0.55.77:8080/api/rest/v1/products/", option)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
+        articles.post('/products', articles.findAll);
     }
 }
 module.exports = Akeneo;

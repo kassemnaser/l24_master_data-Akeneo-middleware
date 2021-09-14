@@ -2,6 +2,7 @@ import fetch from "node-fetch";
 import btoa = require("btoa");
 const http = require('http');
 require('dotenv').config();
+const articles = require('./retrieveAllArticles')
 
 class Akeneo {
 
@@ -53,24 +54,21 @@ class Akeneo {
     return options;
   }
 
-  getData() {
+  public importProducts() {
     const option = {
       method: 'GET',
-      host: process.env.HOST,
-      port: process.env.PORT,
-      url: '/api/rest/v1/products/83300000058',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.accessToken,
       },
     };
 
-    fetch("http://10.0.55.77:8080/api/rest/v1/products/83300000058", option)
+    fetch("http://10.0.55.77:8080/api/rest/v1/products/", option)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
+    articles.post('/products', articles.findAll);
   }
-
 }
 
 module.exports = Akeneo;
