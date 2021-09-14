@@ -1,4 +1,3 @@
-/*
 import fetch from "node-fetch";
 import btoa = require("btoa");
 const http = require('http');
@@ -7,19 +6,17 @@ require('dotenv').config();
 class Akeneo {
 
   private expiresAt = 0;
-  private accessToken: string;
+  private accessToken = '';
   private refreshToken = '';
 
-  constructor(expiresAt: number, token: any, refreshToken: any) {
-    console.log(this.authenticate());
+  constructor(expiresAt: number, accessToken: string, refreshToken: string) {
+    //console.log(this.authenticate());
     this.expiresAt = expiresAt;
     this.refreshToken = refreshToken;
-    this.accessToken = token;
-    //this.getData();
-    //console.log(this.token);
+    this.accessToken = accessToken;
   }
 
-  private async authenticate(): Promise<any> {
+  private async authenticate(): Promise<Response> {
 
     const options = await fetch('http://' + process.env.HOST + ':' + process.env.PORT + '/api/oauth/v1/token',{
       method: 'POST',
@@ -53,33 +50,27 @@ class Akeneo {
     } else {
       console.debug('Authentication failed');
     }
+    return options;
   }
 
   getData() {
     const option = {
       method: 'GET',
-      host: '10.0.55.77',
-      port: 8080,
+      host: process.env.HOST,
+      port: process.env.PORT,
       url: '/api/rest/v1/products/83300000058',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + this.accessToken,
       },
     };
-    console.log(this.accessToken);
-    const req = http.request(option, (res: any) => {
-      console.log(`statusCode: ${res.statusCode}`)
-      res.on('data', (d: any) => {
-        console.log(d);
-      })
-    })
-    req.on('error', (error: Error) => {
-      console.error(error)
-    })
-    req.end();
+
+    fetch("http://10.0.55.77:8080/api/rest/v1/products/83300000058", option)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
   }
+
 }
 
 module.exports = Akeneo;
-
- */
