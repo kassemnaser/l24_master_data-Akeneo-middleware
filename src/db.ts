@@ -1,20 +1,23 @@
-const mysql = require('mysql');
-const dbConfig = require('./config/db.config.js');
+import mysql = require('mysql');
+require('dotenv').config();
+
 class DB {
+
   dbConnection: any;
   // create a connection variable with the required details
   constructor() {
     this.dbConnection = mysql.createConnection({
-      host: '172.17.0.3',
-      user: 'root',
-      password: 'Start2021',
-      database: 'l24_master_data',
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
     });
+    this.dbConnect();
   }
 
-  // if the connection is successful
-  public dbConnect() {
-    this.dbConnection.connect((err: Error) => {
+  public dbConnect(): string{
+    // if database connection is successful
+    return this.dbConnection.connect((err: Error) => {
       if (err) {
         console.log('Connection failed!!! Error:');
         throw err;
@@ -25,10 +28,9 @@ class DB {
   }
 
   // select data from l24_pim_export
-  readArticles() {
-    this.dbConnection.query(
-      'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1',
-      (err: Error, results: string[]) => {
+  public readArticles(): string {
+    let sqlQuery = 'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1';
+    this.dbConnection.query(sqlQuery, (err: Error, results: string[]) => {
         if (err) {
           throw err;
         } else {
@@ -47,6 +49,8 @@ class DB {
         console.log('Closing connection.');
       }
     });
+
+    return this.dbConnection;
   }
 }
 

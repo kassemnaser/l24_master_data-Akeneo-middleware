@@ -1,3 +1,4 @@
+/*
 import fetch from "node-fetch";
 import btoa = require("btoa");
 const http = require('http');
@@ -10,7 +11,7 @@ class Akeneo {
   private refreshToken = '';
 
   constructor(expiresAt: number, token: any, refreshToken: any) {
-    //console.log(this.authenticate());
+    console.log(this.authenticate());
     this.expiresAt = expiresAt;
     this.refreshToken = refreshToken;
     this.accessToken = token;
@@ -18,7 +19,7 @@ class Akeneo {
     //console.log(this.token);
   }
 
-  private async authenticate() {
+  private async authenticate(): Promise<any> {
 
     const options = await fetch('http://' + process.env.HOST + ':' + process.env.PORT + '/api/oauth/v1/token',{
       method: 'POST',
@@ -80,3 +81,5 @@ class Akeneo {
 }
 
 module.exports = Akeneo;
+
+ */
