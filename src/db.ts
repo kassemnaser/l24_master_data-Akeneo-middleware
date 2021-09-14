@@ -5,10 +5,10 @@ class DB {
   // create a connection variable with the required details
   constructor() {
     this.dbConnection = mysql.createConnection({
-      host: dbConfig.HOST,
-      user: dbConfig.USER,
-      password: dbConfig.PASSWORD,
-      database: dbConfig.DATABASE,
+      host: '172.17.0.3',
+      user: 'root',
+      password: 'Start2021',
+      database: 'l24_master_data',
     });
   }
 
