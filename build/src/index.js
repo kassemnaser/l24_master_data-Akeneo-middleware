@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.l24_master_dataFunc = void 0;
-const l24_master_dataFunc = (req, res) => {
+const akeneo_1 = require("./akeneo");
+const l24_master_dataFunc = async (req, res) => {
     res.send('Hello, World');
     // include dbConnection
     //const DB = require('./db');
     //const myDB = new DB();
     //myDB.readArticles();
-    const Akeneo = require('./akeneo');
-    const client = new Akeneo();
-    client.authenticate();
+    const client = new akeneo_1.default();
+    await client.authenticate();
     client.importProducts();
     //const token = require('./auth')
     //const dd = new token();

@@ -5,7 +5,8 @@
     "outDir": "build",
     "lib": [
       "dom"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*.ts",

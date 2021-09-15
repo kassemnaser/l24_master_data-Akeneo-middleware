@@ -1,4 +1,5 @@
 import mysql = require('mysql');
+import {Response} from "express";
 require('dotenv').config();
 
 class DB {

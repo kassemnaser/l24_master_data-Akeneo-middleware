@@ -1,74 +1,57 @@
 import fetch from "node-fetch";
-import btoa = require("btoa");
-const http = require('http');
+//import btoa = require("btoa");
+import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
+import {response} from "express";
+//import qs from "qs";
 require('dotenv').config();
-const articles = require('./retrieveAllArticles')
+//const articles = require('./articles');
 
-class Akeneo {
+export default class Akeneo {
 
-  private expiresAt = 0;
-  private accessToken = '';
-  private refreshToken = '';
+  //private expiresAt: number = 0;
+  public accessToken: string = '';
+  //private refreshToken: string = '';
 
-  constructor(expiresAt: number, accessToken: string, refreshToken: string) {
-    //console.log(this.authenticate());
-    this.expiresAt = expiresAt;
-    this.refreshToken = refreshToken;
-    this.accessToken = accessToken;
+  constructor() {
+
+    //this.authenticate();
+    //this.expiresAt = 0;
+    //this.refreshToken = '';
+
   }
 
-  private async authenticate(): Promise<Response> {
+    public async authenticate(): Promise<any> {
 
-    const options = await fetch('http://' + process.env.HOST + ':' + process.env.PORT + '/api/oauth/v1/token',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(process.env.CLIENT_ID + ':' + process.env.SECRET),
-      },
-      body: JSON.stringify({
-        grant_type: process.env.GRANT_TYPE,
-        username: process.env.USERNAME,
-        password: process.env.PASSWORD,
-      }),
-    }).then((response) => {
-      if (response.status == 200) {
-        return response.json();
-      } else {
-        console.error(`Request returned status "${response.status}"`)
-        return false
-      }
-    }).catch((err) => {
-      console.error(err);
-      return false;
-    });
+        const request = axios.create({
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic OF80MjFqcDFvMjZ0a3djODBnczAwMGdjZ2tjNG9rOHcwZ2tnd3M0MGc0Z2NzMHM4Y293dzoxYXVjYzJmb21oeGN3Z29vdzhjNDg0b2NjNGdzZ2dnc3djazA4NDQ4dzRjc2NjODA0Zw=='
+            }
+        })
 
-    if (options !== false) {
-      this.accessToken = options.access_token;
-      console.log(this.accessToken);
-      this.refreshToken = options.refresh_token;
-      this.expiresAt = Date.now() + options.expires_in * 1000;
-      console.debug('Authentication successful');
-    } else {
-      console.debug('Authentication failed');
-    }
-    return options;
+        const response: AxiosResponse = await request.post('http://10.0.55.77:8080/api/oauth/v1/token', {
+            grant_type: 'password',
+            username: 'l24_master_dataconnector_9892',
+            password: '2b78612b7'
+        })
+
+        //this.accessToken = response.data.access_token;
+        this.accessToken = response.data.access_token;
+
   }
 
-  public importProducts() {
-    const option = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.accessToken,
-      },
-    };
+  public async importProducts() {
+      //console.log(this.accessToken)
 
-    fetch("http://10.0.55.77:8080/api/rest/v1/products/", option)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-    articles.post('/products', articles.findAll);
+      axios.get('http://10.0.55.77:8080/api/rest/v1/products/1111111171', {
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + this.accessToken,
+          }
+      })
+          .then((response) => console.log(JSON.stringify(response.data)))
+          .catch((error) => console.log(error))
   }
+
 }
 
-module.exports = Akeneo;
