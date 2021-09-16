@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 const articles_1 = require("./articles");
+const buffer_1 = require("buffer");
 require('dotenv').config();
 class Akeneo {
     constructor() {
@@ -13,7 +14,7 @@ class Akeneo {
         const request = axios_1.default.create({
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Basic OF80MjFqcDFvMjZ0a3djODBnczAwMGdjZ2tjNG9rOHcwZ2tnd3M0MGc0Z2NzMHM4Y293dzoxYXVjYzJmb21oeGN3Z29vdzhjNDg0b2NjNGdzZ2dnc3djazA4NDQ4dzRjc2NjODA0Zw=='
+                'Authorization': 'Basic ' + buffer_1.Buffer.from(process.env.CLIENT_ID + ':' + process.env.SECRET).toString('base64'),
             }
         });
         const response = await request.post(process.env.SERVER + '/api/oauth/v1/token', {
@@ -23,7 +24,7 @@ class Akeneo {
         });
         this.accessToken = response.data.access_token;
         this.refreshToken = response.data.refresh_token;
-        this.expiresAt = response.data.expires_in;
+        this.expiresAt = Date.now() + response.data.expires_in * 1000;
     }
     async getProducts() {
         await axios_1.default.get(process.env.SERVER + '/api/rest/v1/products/1111111171', {
@@ -37,9 +38,11 @@ class Akeneo {
     }
     async importProducts() {
         const article = new articles_1.Articles();
-        await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products/', {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + this.accessToken,
+        await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products/articles', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.accessToken,
+            },
             data: article.findAll,
         })
             .then((response) => {

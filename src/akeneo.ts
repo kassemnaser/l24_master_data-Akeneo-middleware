@@ -1,5 +1,7 @@
 import axios, {AxiosResponse} from "axios";
 import {Articles} from './articles';
+import {Buffer} from "buffer";
+
 require('dotenv').config();
 
 
@@ -9,13 +11,15 @@ export default class Akeneo {
   public accessToken: string = '';
   private refreshToken: string = '';
 
-  constructor() {}
+  constructor() {
+
+  }
 
   public async authenticate(): Promise<any> {
       const request = axios.create({
           headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Basic OF80MjFqcDFvMjZ0a3djODBnczAwMGdjZ2tjNG9rOHcwZ2tnd3M0MGc0Z2NzMHM4Y293dzoxYXVjYzJmb21oeGN3Z29vdzhjNDg0b2NjNGdzZ2dnc3djazA4NDQ4dzRjc2NjODA0Zw=='
+              'Authorization': 'Basic ' + Buffer.from(process.env.CLIENT_ID + ':' + process.env.SECRET).toString('base64'),
           }
       })
 
@@ -42,16 +46,19 @@ export default class Akeneo {
       }).catch((error) => console.log(error));
   }
 
+
   public async importProducts() {
       
       const article = new Articles();
-      await axios.post(process.env.SERVER + '/api/rest/v1/products/', {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + this.accessToken,
-          data : article.findAll,
+      await axios.post(process.env.SERVER + '/api/rest/v1/products/articles', {
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + this.accessToken,
+          },
+          data: article.findAll,
       })
       .then((response: AxiosResponse) => {
-          console.log(response.data)
+          console.log(response.data);
       }).catch((error) => console.log(error));
 
   }

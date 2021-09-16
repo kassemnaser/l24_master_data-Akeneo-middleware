@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DB = void 0;
 const mysql = require("mysql");
 require('dotenv').config();
 class DB {
@@ -18,12 +17,11 @@ class DB {
         // if database connection is successful
         return this.dbConnection.connect((err) => {
             if (err) {
-                console.log('Connection failed!!! Error:');
+                console.log('Connection failed!!! Error: ');
                 throw err;
             }
-            else {
+            else
                 console.log('Database connection established.');
-            }
         });
     }
     // select articles from l24_pim_export.
@@ -52,5 +50,5 @@ class DB {
         return this.dbConnection;
     }
 }
-exports.DB = DB;
+exports.default = DB;
 //# sourceMappingURL=db.js.map

@@ -1,4 +1,4 @@
-export declare class DB {
+export default class DB {
     dbConnection: any;
     constructor();
     dbConnect(): string;
