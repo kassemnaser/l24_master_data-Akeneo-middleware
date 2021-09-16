@@ -10,7 +10,8 @@ export const l24_master_dataFunc: HttpFunction = async (req, res) => {
 
   const client = new Akeneo();
   await client.authenticate();
-  client.importProducts();
+  //await client.getProducts();
+  await client.importProducts();
   //const token = require('./auth')
   //const dd = new token();
   //dd.token();

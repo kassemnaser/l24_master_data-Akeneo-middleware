@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DB = void 0;
 const mysql = require("mysql");
 require('dotenv').config();
 class DB {
@@ -25,7 +26,7 @@ class DB {
             }
         });
     }
-    // select data from l24_pim_export
+    // select articles from l24_pim_export.
     readArticles() {
         let sqlQuery = 'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1';
         this.dbConnection.query(sqlQuery, (err, results) => {
@@ -51,5 +52,5 @@ class DB {
         return this.dbConnection;
     }
 }
-module.exports = DB;
+exports.DB = DB;
 //# sourceMappingURL=db.js.map

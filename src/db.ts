@@ -2,7 +2,7 @@ import mysql = require('mysql');
 import {Response} from "express";
 require('dotenv').config();
 
-class DB {
+export default class DB {
 
   dbConnection: any;
   // create a connection variable with the required details
@@ -20,17 +20,15 @@ class DB {
     // if database connection is successful
     return this.dbConnection.connect((err: Error) => {
       if (err) {
-        console.log('Connection failed!!! Error:');
+        console.log('Connection failed!!! Error: ');
         throw err;
-      } else {
-        console.log('Database connection established.');
-      }
+      } else console.log('Database connection established.');
     });
   }
 
-  // select data from l24_pim_export
+  // select articles from l24_pim_export.
   public readArticles(): string {
-    let sqlQuery = 'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1';
+    let sqlQuery: string = 'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1';
     this.dbConnection.query(sqlQuery, (err: Error, results: string[]) => {
         if (err) {
           throw err;
@@ -53,6 +51,5 @@ class DB {
 
     return this.dbConnection;
   }
-}
 
-module.exports = DB;
+}
