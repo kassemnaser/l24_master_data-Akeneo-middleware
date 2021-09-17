@@ -16,6 +16,7 @@ export default class Akeneo {
   }
 
   public async authenticate(): Promise<any> {
+
       const request = axios.create({
           headers: {
               'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ export default class Akeneo {
   public async importProducts() {
       
       const article = new Articles();
-      await axios.post(process.env.SERVER + '/api/rest/v1/products/articles', {
+      await axios.post(process.env.SERVER + '/api/rest/v1/products/', {
           headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + this.accessToken,
@@ -60,7 +61,6 @@ export default class Akeneo {
       .then((response: AxiosResponse) => {
           console.log(response.data);
       }).catch((error) => console.log(error));
-
   }
 
 }

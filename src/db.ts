@@ -16,8 +16,10 @@ export default class DB {
     this.dbConnect();
   }
 
+  /*
+  * looks if the database connection is established.
+  * */
   public dbConnect(): string{
-    // if database connection is successful
     return this.dbConnection.connect((err: Error) => {
       if (err) {
         console.log('Connection failed!!! Error: ');
@@ -26,7 +28,10 @@ export default class DB {
     });
   }
 
-  // select articles from l24_pim_export.
+
+  /*
+  * Read articles from the view l24_pim_export
+  * */
   public readArticles(): string {
     let sqlQuery: string = 'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1';
     this.dbConnection.query(sqlQuery, (err: Error, results: string[]) => {

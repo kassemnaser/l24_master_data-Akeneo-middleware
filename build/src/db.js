@@ -13,8 +13,10 @@ class DB {
         });
         this.dbConnect();
     }
+    /*
+    * looks if the database connection is established.
+    * */
     dbConnect() {
-        // if database connection is successful
         return this.dbConnection.connect((err) => {
             if (err) {
                 console.log('Connection failed!!! Error: ');
@@ -24,7 +26,9 @@ class DB {
                 console.log('Database connection established.');
         });
     }
-    // select articles from l24_pim_export.
+    /*
+    * Read articles from the view l24_pim_export
+    * */
     readArticles() {
         let sqlQuery = 'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1';
         this.dbConnection.query(sqlQuery, (err, results) => {

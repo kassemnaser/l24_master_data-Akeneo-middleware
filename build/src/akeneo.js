@@ -24,7 +24,7 @@ class Akeneo {
         });
         this.accessToken = response.data.access_token;
         this.refreshToken = response.data.refresh_token;
-        this.expiresAt = Date.now() + response.data.expires_in * 1000;
+        this.expiresAt = response.data.expires_in;
     }
     async getProducts() {
         await axios_1.default.get(process.env.SERVER + '/api/rest/v1/products/1111111171', {
@@ -38,7 +38,7 @@ class Akeneo {
     }
     async importProducts() {
         const article = new articles_1.Articles();
-        await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products/articles', {
+        await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products/', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + this.accessToken,

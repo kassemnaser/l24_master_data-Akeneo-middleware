@@ -12,9 +12,6 @@ export const l24_master_dataFunc: HttpFunction = async (req, res) => {
   await client.authenticate();
   //await client.getProducts();
   await client.importProducts();
-  //const token = require('./auth')
-  //const dd = new token();
-  //dd.token();
-  //dd.getArticles();
+
 };
 

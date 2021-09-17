@@ -12,10 +12,6 @@ const l24_master_dataFunc = async (req, res) => {
     await client.authenticate();
     //await client.getProducts();
     await client.importProducts();
-    //const token = require('./auth')
-    //const dd = new token();
-    //dd.token();
-    //dd.getArticles();
 };
 exports.l24_master_dataFunc = l24_master_dataFunc;
 //# sourceMappingURL=index.js.map
