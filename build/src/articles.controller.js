@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Articles = void 0;
+exports.ArticlesController = void 0;
 const Article = require('./db');
-class Articles {
+class ArticlesController {
     constructor() {
     }
     // Retrieve all ArticlesController from database.
@@ -15,5 +15,5 @@ class Articles {
         });
     }
 }
-exports.Articles = Articles;
-//# sourceMappingURL=articles.js.map
+exports.ArticlesController = ArticlesController;
+//# sourceMappingURL=articles.controller.js.map

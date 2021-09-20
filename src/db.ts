@@ -32,6 +32,7 @@ export default class DB {
   /*
   * Read articles from the view l24_pim_export
   * */
+/*
   public readArticles(): string {
     let sqlQuery: string = 'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1';
     this.dbConnection.query(sqlQuery, (err: Error, results: string[]) => {
@@ -55,6 +56,19 @@ export default class DB {
     });
 
     return this.dbConnection;
+  }
+*/
+  getAll(result: any) {
+    this.dbConnection.query('SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1', (err: any, res: any) => {
+      if (err) {
+        console.log('error: ', err);
+        result(null, err);
+        return;
+      }
+
+      console.log('articles: ', res);
+      result(null, res);
+    });
   }
 
 }

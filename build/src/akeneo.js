@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
-const articles_1 = require("./articles");
 const buffer_1 = require("buffer");
 require('dotenv').config();
+//const art = require('./article.router.ts');
 class Akeneo {
     constructor() {
         this.expiresAt = 0;
@@ -37,13 +37,12 @@ class Akeneo {
         }).catch((error) => console.log(error));
     }
     async importProducts() {
-        const article = new articles_1.Articles();
-        await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products/', {
+        await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + this.accessToken,
             },
-            data: article.findAll,
+            //data: art,
         })
             .then((response) => {
             console.log(response.data);

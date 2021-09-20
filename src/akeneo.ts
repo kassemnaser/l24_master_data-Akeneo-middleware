@@ -1,8 +1,9 @@
 import axios, {AxiosResponse} from "axios";
-import {Articles} from './articles';
+import {ArticlesController} from './articles.controller';
 import {Buffer} from "buffer";
 
 require('dotenv').config();
+//const art = require('./article.router.ts');
 
 
 export default class Akeneo {
@@ -47,16 +48,14 @@ export default class Akeneo {
       }).catch((error) => console.log(error));
   }
 
-
   public async importProducts() {
-      
-      const article = new Articles();
-      await axios.post(process.env.SERVER + '/api/rest/v1/products/', {
+
+      await axios.post(process.env.SERVER + '/api/rest/v1/products', {
           headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + this.accessToken,
           },
-          data: article.findAll,
+          //data: art,
       })
       .then((response: AxiosResponse) => {
           console.log(response.data);
