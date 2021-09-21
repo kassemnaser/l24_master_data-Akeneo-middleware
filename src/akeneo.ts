@@ -1,65 +1,57 @@
-import axios, {AxiosResponse} from "axios";
-import {ArticlesController} from './articles.controller';
-import {Buffer} from "buffer";
+import axios, {AxiosResponse} from 'axios';
+import {Buffer} from 'buffer';
+import DB from './db';
 
 require('dotenv').config();
-//const art = require('./article.router.ts');
-
 
 export default class Akeneo {
+  private expiresAt = 0;
+  public accessToken = '';
+  private refreshToken = '';
 
-  private expiresAt: number = 0;
-  public accessToken: string = '';
-  private refreshToken: string = '';
-
-  constructor() {
-
-  }
+  constructor() {}
 
   public async authenticate(): Promise<any> {
+    const request = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + Buffer.from(process.env.CLIENT_ID + ':' + process.env.SECRET).toString('base64'),
+      },
+    });
 
-      const request = axios.create({
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Basic ' + Buffer.from(process.env.CLIENT_ID + ':' + process.env.SECRET).toString('base64'),
-          }
-      })
+    const response: AxiosResponse = await request.post(process.env.SERVER + '/api/oauth/v1/token', {
+        grant_type: process.env.GRANT_TYPE,
+        username: process.env.USERNAME,
+        password: process.env.PASSWORD,
+      }
+    );
 
-      const response: AxiosResponse = await request.post(process.env.SERVER + '/api/oauth/v1/token', {
-          grant_type: process.env.GRANT_TYPE,
-          username: process.env.USERNAME,
-          password: process.env.PASSWORD
-      })
-
-      this.accessToken = response.data.access_token;
-      this.refreshToken = response.data.refresh_token;
-      this.expiresAt = response.data.expires_in;
+    this.accessToken = response.data.access_token;
+    this.refreshToken = response.data.refresh_token;
+    this.expiresAt = response.data.expires_in;
   }
 
   public async getProducts() {
-
-      await axios.get(process.env.SERVER + '/api/rest/v1/products/1111111171', {
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + this.accessToken,
-          }
+    await axios.get(process.env.SERVER + '/api/rest/v1/products/1111111171', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.accessToken,
+        },
       }).then((response: AxiosResponse) => {
-          console.log(response.data);
-      }).catch((error) => console.log(error));
+        console.log(response.data);
+      }).catch(error => console.log(error));
   }
 
   public async importProducts() {
-
-      await axios.post(process.env.SERVER + '/api/rest/v1/products', {
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + this.accessToken,
-          },
-          //data: art,
-      })
-      .then((response: AxiosResponse) => {
-          console.log(response.data);
-      }).catch((error) => console.log(error));
+      const myDB = new DB();
+    await axios.post(process.env.SERVER + '/api/rest/v1/products/', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.accessToken,
+        },
+        data: myDB.readArticles(),
+      }).then((response: AxiosResponse) => {
+        console.log(response.data);
+      }).catch(error => console.log(error));
   }
-
 }
