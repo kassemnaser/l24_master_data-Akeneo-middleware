@@ -3,6 +3,7 @@ require('dotenv').config();
 
 export default class DB {
   dbConnection: any;
+  connected: boolean = false;
   // create a connection variable with the required details
   constructor() {
     this.dbConnection = mysql.createConnection({
@@ -17,19 +18,21 @@ export default class DB {
   /*
    * looks if the database connection is established.
    * */
-  public dbConnect(): string {
-    return this.dbConnection.connect((err: Error) => {
+  public dbConnect() {
+    this.dbConnection.connect((err: mysql.MysqlError) => {
       if (err) {
-        console.log('Connection failed!!! Error: ');
-        throw err;
-      } else console.log('Database connection established.');
+        console.log(err.message);
+        return;
+      }
+      this.connected = true;
+      console.log('MySQL Connection established!');
     });
   }
 
   /*
    * Read articles from the view l24_pim_export
    */
-  public readArticles(): string {
+  public readArticles() {
     const sqlQuery = 'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1';
     this.dbConnection.query(sqlQuery, (err: Error, results: string[]) => {
       if (err) {
@@ -42,9 +45,10 @@ export default class DB {
         console.log('Done.');
       }
     });
-    this.dbConnection.end((err: Error) => {
-      if (err) {
-        throw err;
+
+    this.dbConnection.end((error: Error) => {
+      if (error) {
+        throw error;
       } else {
         console.log('Closing connection.');
       }

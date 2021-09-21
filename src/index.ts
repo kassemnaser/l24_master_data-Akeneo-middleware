@@ -8,8 +8,8 @@ export const l24_master_dataFunc: HttpFunction = async (
   res: Response
 ) => {
   // include dbConnection
-  const db = new DB();
-  db.readArticles();
+  //const db = new DB();
+  //db.readArticles();
   /*
   const app = express();
   const articles = require('./article.router');

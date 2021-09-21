@@ -5,6 +5,7 @@ require('dotenv').config();
 class DB {
     // create a connection variable with the required details
     constructor() {
+        this.connected = false;
         this.dbConnection = mysql.createConnection({
             host: process.env.DB_HOST,
             user: process.env.DB_USER,
@@ -17,13 +18,13 @@ class DB {
      * looks if the database connection is established.
      * */
     dbConnect() {
-        return this.dbConnection.connect((err) => {
+        this.dbConnection.connect((err) => {
             if (err) {
-                console.log('Connection failed!!! Error: ');
-                throw err;
+                console.log(err.message);
+                return;
             }
-            else
-                console.log('Database connection established.');
+            this.connected = true;
+            console.log('MySQL Connection established!');
         });
     }
     /*
@@ -43,9 +44,9 @@ class DB {
                 console.log('Done.');
             }
         });
-        this.dbConnection.end((err) => {
-            if (err) {
-                throw err;
+        this.dbConnection.end((error) => {
+            if (error) {
+                throw error;
             }
             else {
                 console.log('Closing connection.');

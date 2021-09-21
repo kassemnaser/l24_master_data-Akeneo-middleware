@@ -1,6 +1,7 @@
 export default class DB {
     dbConnection: any;
+    connected: boolean;
     constructor();
-    dbConnect(): string;
-    readArticles(): string;
+    dbConnect(): void;
+    readArticles(): any;
 }

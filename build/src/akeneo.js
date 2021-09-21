@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 const buffer_1 = require("buffer");
+const db_1 = require("./db");
 require('dotenv').config();
 class Akeneo {
     constructor() {
@@ -13,8 +14,7 @@ class Akeneo {
         const request = axios_1.default.create({
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: 'Basic ' +
-                    buffer_1.Buffer.from(process.env.CLIENT_ID + ':' + process.env.SECRET).toString('base64'),
+                'Authorization': 'Basic ' + buffer_1.Buffer.from(process.env.CLIENT_ID + ':' + process.env.SECRET).toString('base64'),
             },
         });
         const response = await request.post(process.env.SERVER + '/api/oauth/v1/token', {
@@ -27,30 +27,26 @@ class Akeneo {
         this.expiresAt = response.data.expires_in;
     }
     async getProducts() {
-        await axios_1.default
-            .get(process.env.SERVER + '/api/rest/v1/products/1111111171', {
+        await axios_1.default.get(process.env.SERVER + '/api/rest/v1/products/1111111171', {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + this.accessToken,
+                'Authorization': 'Bearer ' + this.accessToken,
             },
-        })
-            .then((response) => {
+        }).then((response) => {
             console.log(response.data);
-        })
-            .catch(error => console.log(error));
+        }).catch(error => console.log(error));
     }
     async importProducts() {
-        await axios_1.default
-            .post(process.env.SERVER + '/api/rest/v1/products/articles', {
+        const myDB = new db_1.default();
+        await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products/', {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + this.accessToken,
+                'Authorization': 'Bearer ' + this.accessToken,
             },
-        })
-            .then((response) => {
+            data: myDB.readArticles(),
+        }).then((response) => {
             console.log(response.data);
-        })
-            .catch(error => console.log(error));
+        }).catch(error => console.log(error));
     }
 }
 exports.default = Akeneo;
