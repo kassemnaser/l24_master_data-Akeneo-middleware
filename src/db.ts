@@ -2,8 +2,9 @@ import mysql = require('mysql');
 require('dotenv').config();
 
 export default class DB {
-  dbConnection: any;
+  dbConnection: mysql.Connection;
   connected: boolean = false;
+
   // create a connection variable with the required details
   constructor() {
     this.dbConnection = mysql.createConnection({
@@ -16,27 +17,27 @@ export default class DB {
   }
 
   /*
-   * looks if the database connection is established.
-   * */
+   * checks if the database connection is established.
+   */
   public dbConnect() {
-    this.dbConnection.connect((err: mysql.MysqlError) => {
-      if (err) {
-        console.log(err.message);
+    this.dbConnection.connect((error: mysql.MysqlError) => {
+      if (error) {
+        console.log(error.message);
         return;
       }
       this.connected = true;
-      console.log('MySQL Connection established!');
+      console.log('Connection to l24_pim_export established!');
     });
   }
 
   /*
-   * Read articles from the view l24_pim_export
+   * reads articles from the view l24_pim_export
    */
   public readArticles() {
-    const sqlQuery = 'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1';
-    this.dbConnection.query(sqlQuery, (err: Error, results: string[]) => {
-      if (err) {
-        throw err;
+    const sqlQuery = 'SELECT `l24-sku` FROM l24_pim_export limit 1';
+    this.dbConnection.query(sqlQuery, (error: Error, results: string[]) => {
+      if (error) {
+        throw error;
       } else {
         console.log('Selected ' + results.length + ' row(s).');
         for (let i = 0; i < results.length; i++) {
@@ -45,15 +46,21 @@ export default class DB {
         console.log('Done.');
       }
     });
-
-    this.dbConnection.end((error: Error) => {
-      if (error) {
-        throw error;
-      } else {
-        console.log('Closing connection.');
-      }
-    });
-
     return this.dbConnection;
   }
+/*
+  public readArticles(sqlQuery: string, callback: Function){
+    this.dbConnection.query(sqlQuery, (error: Error, results: object[], fields: []) => {
+      if (error) {
+        callback(error);
+      }
+      else if (results.length === 0) {
+        callback('There is no record');
+      }
+      else {
+        callback(null, results);
+      }
+    })
+  }
+ */
 }

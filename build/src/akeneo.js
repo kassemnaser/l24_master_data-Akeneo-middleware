@@ -6,9 +6,9 @@ const db_1 = require("./db");
 require('dotenv').config();
 class Akeneo {
     constructor() {
-        this.expiresAt = 0;
         this.accessToken = '';
         this.refreshToken = '';
+        this.expiresAt = 0;
     }
     async authenticate() {
         const request = axios_1.default.create({
@@ -25,7 +25,9 @@ class Akeneo {
         this.accessToken = response.data.access_token;
         this.refreshToken = response.data.refresh_token;
         this.expiresAt = response.data.expires_in;
+        return this.accessToken;
     }
+    // get products form Akeneo.
     async getProducts() {
         await axios_1.default.get(process.env.SERVER + '/api/rest/v1/products/1111111171', {
             headers: {
@@ -36,9 +38,10 @@ class Akeneo {
             console.log(response.data);
         }).catch(error => console.log(error));
     }
+    // imports products into Akeneo.
     async importProducts() {
         const myDB = new db_1.default();
-        await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products/', {
+        await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + this.accessToken,

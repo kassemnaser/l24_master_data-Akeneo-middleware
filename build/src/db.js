@@ -15,26 +15,26 @@ class DB {
         this.dbConnect();
     }
     /*
-     * looks if the database connection is established.
-     * */
+     * checks if the database connection is established.
+     */
     dbConnect() {
-        this.dbConnection.connect((err) => {
-            if (err) {
-                console.log(err.message);
+        this.dbConnection.connect((error) => {
+            if (error) {
+                console.log(error.message);
                 return;
             }
             this.connected = true;
-            console.log('MySQL Connection established!');
+            console.log('Connection to l24_pim_export established!');
         });
     }
     /*
-     * Read articles from the view l24_pim_export
+     * reads articles from the view l24_pim_export
      */
     readArticles() {
-        const sqlQuery = 'SELECT * FROM l24_pim_export WHERE brand = "SNX" limit 1';
-        this.dbConnection.query(sqlQuery, (err, results) => {
-            if (err) {
-                throw err;
+        const sqlQuery = 'SELECT `l24-sku` FROM l24_pim_export limit 1';
+        this.dbConnection.query(sqlQuery, (error, results) => {
+            if (error) {
+                throw error;
             }
             else {
                 console.log('Selected ' + results.length + ' row(s).');
@@ -42,14 +42,6 @@ class DB {
                     console.log(results[i]);
                 }
                 console.log('Done.');
-            }
-        });
-        this.dbConnection.end((error) => {
-            if (error) {
-                throw error;
-            }
-            else {
-                console.log('Closing connection.');
             }
         });
         return this.dbConnection;

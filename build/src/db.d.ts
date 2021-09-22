@@ -1,7 +1,8 @@
+import mysql = require('mysql');
 export default class DB {
-    dbConnection: any;
+    dbConnection: mysql.Connection;
     connected: boolean;
     constructor();
     dbConnect(): void;
-    readArticles(): any;
+    readArticles(): mysql.Connection;
 }
