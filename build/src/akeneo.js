@@ -9,6 +9,9 @@ class Akeneo {
         this.refreshToken = '';
         this.expiresAt = 0;
     }
+    /**
+     * authenticates to the Akeneo PIM.
+     * */
     async authenticate() {
         const request = axios_1.default.create({
             headers: {
@@ -26,7 +29,9 @@ class Akeneo {
         this.expiresAt = response.data.expires_in;
         return this.accessToken;
     }
-    // get products form Akeneo.
+    /**
+     * get products form Akeneo.
+     * */
     async getProducts() {
         await axios_1.default.get(process.env.SERVER + '/api/rest/v1/products/1111111171', {
             headers: {
@@ -37,15 +42,20 @@ class Akeneo {
             console.log(response.data);
         }).catch(error => console.log(error));
     }
-    // imports products into Akeneo.
+    /**
+     * imports products into Akeneo.
+     * */
     async importProducts() {
+        //const myQuery = new DB();
+        //const pushData = myQuery.readArticles();
         await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer' + this.accessToken,
             },
+            body: 'Hello',
         }).then((response) => {
-            console.log(response.data);
+            console.log(response.data.json());
         }).catch(error => console.log(error));
     }
 }

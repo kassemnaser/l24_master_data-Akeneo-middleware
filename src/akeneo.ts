@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
 import {Buffer} from 'buffer';
+import DB from "./db";
 require('dotenv').config();
 
 export default class Akeneo {
@@ -9,6 +10,9 @@ export default class Akeneo {
 
     constructor() {}
 
+    /**
+     * authenticates to the Akeneo PIM.
+     * */
     public async authenticate(): Promise<any> {
         const request = axios.create({
             headers: {
@@ -30,7 +34,9 @@ export default class Akeneo {
         return this.accessToken;
     }
 
-    // get products form Akeneo.
+    /**
+     * get products form Akeneo.
+     * */
     public async getProducts() {
         await axios.get(process.env.SERVER + '/api/rest/v1/products/1111111171', {
             headers: {
@@ -42,15 +48,20 @@ export default class Akeneo {
         }).catch(error => console.log(error));
     }
 
-    // imports products into Akeneo.
+    /**
+     * imports products into Akeneo.
+     * */
     public async importProducts() {
+        const myQuery = new DB();
+        const pushData = myQuery.readArticles();
         await axios.post(process.env.SERVER + '/api/rest/v1/products', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer' + this.accessToken,
             },
+            body: 'Hello',
         }).then((response: AxiosResponse) => {
-            console.log(response.data);
+            console.log(response.data.json());
         }).catch(error => console.log(error));
     }
 

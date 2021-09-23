@@ -16,7 +16,7 @@ export default class DB {
     this.dbConnect();
   }
 
-  /*
+  /**
    * checks if the database connection is established.
    */
   public dbConnect() {
