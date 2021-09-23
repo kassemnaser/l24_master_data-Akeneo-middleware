@@ -27,7 +27,7 @@ class DB {
             console.log('Connection to l24_pim_export established!');
         });
     }
-    /*
+    /**
      * reads articles from the view l24_pim_export
      */
     readArticles() {

@@ -1,6 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
 import {Buffer} from 'buffer';
-import DB from './db';
 require('dotenv').config();
 
 export default class Akeneo {
@@ -8,9 +7,7 @@ export default class Akeneo {
     private refreshToken = '';
     private expiresAt = 0;
 
-    constructor() {
-
-    }
+    constructor() {}
 
     public async authenticate(): Promise<any> {
         const request = axios.create({
@@ -47,15 +44,35 @@ export default class Akeneo {
 
     // imports products into Akeneo.
     public async importProducts() {
-        const myDB = new DB();
         await axios.post(process.env.SERVER + '/api/rest/v1/products', {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.accessToken,
+                'Authorization': 'Bearer' + this.accessToken,
             },
-            data: myDB.readArticles(),
         }).then((response: AxiosResponse) => {
             console.log(response.data);
         }).catch(error => console.log(error));
     }
+
+    /*
+    // updates the products in Akeneo.
+    public async updateProducts(){
+        console.log('updating the imported products');
+    }
+    */
+
+    /*
+    // deactivate the products in Akeneo.
+    public async deactivateProducts() {
+        const headers = {
+            'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.accessToken,
+        }
+        await axios.patch(process.env.SERVER + '/api/rest/v1/products/{}', headers, {
+            data: this.getProducts(),
+        }).then((response: AxiosResponse) => {
+            console.log(response.data);
+        }).catch(error => console.log(error));
+    }
+     */
 }

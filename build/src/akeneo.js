@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 const buffer_1 = require("buffer");
-const db_1 = require("./db");
 require('dotenv').config();
 class Akeneo {
     constructor() {
@@ -40,13 +39,11 @@ class Akeneo {
     }
     // imports products into Akeneo.
     async importProducts() {
-        const myDB = new db_1.default();
         await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products', {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.accessToken,
+                'Authorization': 'Bearer' + this.accessToken,
             },
-            data: myDB.readArticles(),
         }).then((response) => {
             console.log(response.data);
         }).catch(error => console.log(error));

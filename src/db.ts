@@ -30,7 +30,7 @@ export default class DB {
     });
   }
 
-  /*
+  /**
    * reads articles from the view l24_pim_export
    */
   public readArticles() {
@@ -48,6 +48,7 @@ export default class DB {
     });
     return this.dbConnection;
   }
+
 /*
   public readArticles(sqlQuery: string, callback: Function){
     this.dbConnection.query(sqlQuery, (error: Error, results: object[], fields: []) => {

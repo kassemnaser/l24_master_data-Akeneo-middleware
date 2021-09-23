@@ -4,5 +4,8 @@ export default class DB {
     connected: boolean;
     constructor();
     dbConnect(): void;
+    /**
+     * reads articles from the view l24_pim_export
+     */
     readArticles(): mysql.Connection;
 }
