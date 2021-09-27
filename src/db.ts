@@ -3,7 +3,7 @@ require('dotenv').config();
 
 export default class DB {
   dbConnection: mysql.Connection;
-  connected: boolean = false;
+  connected = false;
 
   // create a connection variable with the required details
   constructor() {
@@ -41,7 +41,7 @@ export default class DB {
       } else {
         console.log('Selected ' + results.length + ' row(s).');
         for (let i = 0; i < results.length; i++) {
-          console.log(results[i]);
+          console.log(JSON.stringify(results[i]));
         }
         console.log('Done.');
       }
@@ -49,7 +49,7 @@ export default class DB {
     return this.dbConnection;
   }
 
-/*
+  /*
   public readArticles(sqlQuery: string, callback: Function){
     this.dbConnection.query(sqlQuery, (error: Error, results: object[], fields: []) => {
       if (error) {

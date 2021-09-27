@@ -27,7 +27,7 @@ class Akeneo {
         this.accessToken = response.data.access_token;
         this.refreshToken = response.data.refresh_token;
         this.expiresAt = response.data.expires_in;
-        return this.accessToken;
+        //return this.accessToken;
     }
     /**
      * get products form Akeneo.
@@ -46,16 +46,13 @@ class Akeneo {
      * imports products into Akeneo.
      * */
     async importProducts() {
-        //const myQuery = new DB();
-        //const pushData = myQuery.readArticles();
         await axios_1.default.post(process.env.SERVER + '/api/rest/v1/products', {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer' + this.accessToken,
+                Authorization: 'Bearer' + this.accessToken,
             },
-            body: 'Hello',
         }).then((response) => {
-            console.log(response.data.json());
+            console.log(response.data);
         }).catch(error => console.log(error));
     }
 }

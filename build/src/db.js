@@ -39,7 +39,7 @@ class DB {
             else {
                 console.log('Selected ' + results.length + ' row(s).');
                 for (let i = 0; i < results.length; i++) {
-                    console.log(results[i]);
+                    console.log(JSON.stringify(results[i]));
                 }
                 console.log('Done.');
             }

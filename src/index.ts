@@ -5,11 +5,11 @@ import {Request, Response} from 'express';
 
 export const l24_master_dataFunc: HttpFunction = async (req: Request, res: Response) => {
   // include dbConnection
-  //const db = new DB();
+  const db = new DB();
+  db.readArticles();
 
-  const client = new Akeneo();
-  res.send(await client.authenticate());
+  //const client = new Akeneo();
+  //res.send(await client.authenticate());
   //res.send(await client.getProducts());
-  res.send(await client.importProducts());
-
+  //res.send(await client.importProducts());
 };
