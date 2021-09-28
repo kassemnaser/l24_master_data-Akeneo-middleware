@@ -1,0 +1,105 @@
+
+
+Der Projektantrag ist online abzugeben. Um eine Vorprüfung durch die Schule zu ermöglichen enthält diese Datei die Felder des Online-Antrages. 
+
+    1. Thema der Projektarbeit
+       
+       Automatisierte Web-Anwendung zum Importieren von internen MySQL-Daten in Akeneo (https://www.akeneo.com/de/) über eine neu erstellte Middleware, wenn die Auto-Leebmann-Daten nicht in MySQL, aber in Akeneo verfügbar sind, müssen diese in Akeneo deaktiviert werden. Außerdem wenn die Daten in Akeneo vorhanden sind, müssen sie in Akeneo aktualisiert werden.
+       
+    2. Termin, Geplanter Bearbeitungszeitraum
+
+Beginn:	Vorgabe durch IHK, nicht tatsächlicher Zeitraum, sondern Zeitraum nach Genehmigung.
+Ende: 	Vorgabe durch IHK.
+
+    3. Projektbeschreibung
+       
+Die Auto Leebmann GmbH, BMW-Vertragspartner und Betreiber eines führenden Online-Shops in Deutschland, möchte ihr Online-Shop auszubauen.
+
+Problem:
+
+    • Daten können in Akeneo nicht automatisch importiert, aktualisiert und deaktiviert werden.
+    • Zeitlicher Aufwand ist groß, um die Daten manuell von Auto Leebmann in Akeneo zu importieren oder aktualisieren.
+    • Stehen Teile nicht zur Verfügung, bleiben sie trotzdem für Users sichtbar und werden in Akeneo nicht deaktiviert.
+
+Lösung:
+
+Um dieses Problem zu lösen, soll eine interne Middleware erstellt werden. Diese ermöglicht, die Daten von internen MySQL-Datenbank in Akeneo zu importieren, zu aktualisieren und zu deaktivieren.
+
+    4. Erwartetes Ergebnis
+
+Mit dem fertiggestellten Projekt soll das Importieren, Aktualisieren und Deaktivieren der internen MySQL-Daten von Leebmann in Akeneo automatisiert vereinfacht werden und einheitlich möglich sein. 
+
+
+
+
+    5. Schnittstellen 
+
+Die Entwicklung des gesamten Projekts wird vom Arbeitsplatz PC durchgeführt.
+Das Projekt wurde unter Verwendung des Google Functions-Frameworks für Node.js erstellt und als Entwicklungsumgebung wurde WebStorm verwendet. Das Projekt wird in einer lokalen, virtuellen Umgebung getestet.
+
+    6. Projektumfeld
+       
+Praktikumsbetrieb:
+Auto-Leebmann GmbH
+Praktikumsbetreuer:
+Sabine Tischler
+Projektleiter:
+Michael Trefz
+
+
+Verwendete Programmiersprachen:
+Typescript, Node.js
+Vorgehensmodelle der Softwareentwicklung:
+Spiralmodell
+Frameworks:
+Google Functions-Framework
+Entwicklungsumgebung:
+WebStorm
+       
+
+    7. Projektphasen mit Zeitplanung
+
+Analyse:
+
+        ◦ Ist-Analyse.	4 h
+        ◦ Soll-Analyse.	4 h
+        ◦ Anwendungsfalldiagramm (Use Case Diagram).	3 h
+		11 h
+Entwurf:
+
+        ◦ Programmablaufplan.	4 h
+        ◦ Schnittstellen zu den verschiedenen Anwendungen entwerfen.	9 h		13 h
+
+Implementierung:
+
+        ◦ Softwareumgebung einrichten (Dbeaver für MySQL, WebStorm)	6 h
+        ◦ Aufsetzen einer Testumgebung und Durchführen von Tests	5 h
+        ◦ Implementierung	30 h
+            ▪ Implementierung der Middleware		30 h	                   	
+        ◦ Rücksprache mit Projektleiter	4 h
+      		45 h
+Abnahme und Einführung
+
+        ◦ Abnahme durch Auftraggeber Herr Trefz	1 h
+		
+Gesamt:		70 h
+
+    8. Dokumentation zur  Projektarbeit
+
+IHK-Projektdokumentation
+
+    9. Anlagen
+
+
+
+    10. Präsentationstmittel
+
+Beamer, Laptop
+
+    11. Hinweis!
+
+Ich bestätige, dass der Projektantrag dem Ausbildungsbetrieb vorgelegt und vom Ausbildenden genehmigt wurde. Der Projektantrag enthält keine Betriebsgeheimnisse. Soweit diese für die Antragstellung notwendig sind, wurden nach Rücksprache mit dem Ausbildenden die entsprechenden Stellen unkenntlich gemacht.
+
+Mit dem Absenden des Projektantrages bestätige ich weiterhin, dass der Antrag eigenständig von mir angefertigt wurde. Ferner sichere ich zu, dass im Projektantrag personenbezogene Daten (d. h. Daten über die eine Person identifizierbar oder bestimmbar ist) nur verwendet werden, wenn die betroffene Person hierin eingewilligt hat.
+
+Bei meiner ersten Anmeldung im Online-Portal wurde ich darauf hingewiesen, dass meine Arbeit bei Täuschungshandlungen bzw. Ordnungsverstößen mit „null“ Punkten bewertet werden kann. Ich bin weiter darüber aufgeklärt worden, dass dies auch dann gilt, wenn festgestellt wird, dass meine Arbeit im Ganzen oder zu Teilen mit der eines anderen Prüfungsteilnehmers übereinstimmt. Es ist mir bewusst, dass Kontrollen durchgeführt werden.

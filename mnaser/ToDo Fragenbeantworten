@@ -1,0 +1,51 @@
+Was ist dein Projekt?
+ich muss ein Programm erstellen, dass es mir automatisch interne MYSQL-Daten in Akeneo über eine Middleware zu importieren, zu deaktivieren und zu updaten.
+
+Welche Programmiersprachen verwende ich?
+Typscript:
+Es ist ein supersatz von Javascript. das heißt, dass alles, was in javascript implementiert ist, mit Typescript implementiert werden kann.
+
+Der Unterschied zwischen Javascript und Typescript ist: Javascript ist Prototype und dynamisch, Typescript ist Objektorientiert und statisch.
+
+Statische Typsprache Überprüfen Sie jeden Verstoß, bevor Sie das Programm ausführen, während in der dynamischen Typsprache der Fehler ausgegeben wird, wenn das Programm ausgeführt wird und in den Teil geht, in dem der Verstoß ausgeführt wurde. 
+
+Nodejs
+Nodejs ist eine Laufzeitumgebung für Javascript. 
+
+json
+Datenaustauschformat, das für Menschen einfach zu lesen und zu schreiben und für Maschinen einfach zu parsen (Analysieren von Datenstrukturen) und zu generieren ist.
+
+Warum verwende ich Typescript und nicht eine andere Programmiersprache?
+Typescript läuft ohne Server im Hintergrund und die anderen Sprachen wie Java brauchen zusätzlich einen Server im Hintergrund, der dementsprechend auch etwas kostet.
+google cloud functions mit Typescript ist kosten effiezienter ist.
+
+google functions-framework?
+Mit google cloud functions-framework kann man functionen schreiben, die in vielen verschiedenen Umgebungen ausgeführt werden kann. z.B. in Google cloud functions
+
+
+
+
+was ist axios?
+
+
+google cloud
+json (Javascript object notation): 
+
+
+nodejs
+was ist a view?
+ist die Ergebnismenge einer gespeicherten Abfrage
+
+was REST API? Alternativen?
+REST ist eine Programmierschnittstelle (Application Programming Interface, API), die HTTP-Anfragen verwendet, um per GET, PUT, POST und DELETE auf Daten zuzugreifen.
+
+API ermöglicht es zwei Programmen miteinander zu kommunizieren.
+
+Alternative für REST API sind 
+GraphQL APIs, FAlcor APIs
+
+API-Entwickler verwenden GraphQL, um ein Schema zu erstellen, um alle möglichen Daten zu beschreiben, die Clients über diesen Dienst abfragen können. Ein GraphQL-Schema besteht aus Objekttypen, die definieren, welche Art von Objekt Sie anfordern können und welche Felder es enthält. Wenn Abfragen eingehen, validiert GraphQL die Abfragen anhand des Schemas.
+
+Was ist spiralmodell? und warum?
+
+
