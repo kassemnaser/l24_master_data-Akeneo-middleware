@@ -1,4 +1,0 @@
-SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY,',''); --> Ergebnis kopieren
-nano /etc/mysql/my.cnf --> öffnen
-unter dem Abschnitt [mysld] folgendes einfügen sql_mode = "<--hier das ergebnis aus 1-->" -->speichern
-server/service reboot
