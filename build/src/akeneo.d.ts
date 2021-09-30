@@ -15,4 +15,5 @@ export default class Akeneo {
      * imports products into Akeneo.
      * */
     importProducts(): Promise<void>;
+    createProduct(): Promise<void>;
 }

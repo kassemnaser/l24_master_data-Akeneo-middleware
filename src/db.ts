@@ -4,6 +4,7 @@ require('dotenv').config();
 export default class DB {
   dbConnection: mysql.Connection;
   connected = false;
+  public sku = '';
 
   // create a connection variable with the required details
   constructor() {
@@ -39,14 +40,12 @@ export default class DB {
       if (error) {
         throw error;
       } else {
-        console.log('Selected ' + results.length + ' row(s).');
         for (let i = 0; i < results.length; i++) {
-          console.log(JSON.stringify(results[i]));
+          this.sku = JSON.stringify(results[i]);
         }
-        console.log('Done.');
       }
     });
-    return this.dbConnection;
+    return this.sku;
   }
 
   /*

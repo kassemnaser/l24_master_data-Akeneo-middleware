@@ -6,6 +6,7 @@ class DB {
     // create a connection variable with the required details
     constructor() {
         this.connected = false;
+        this.sku = '';
         this.dbConnection = mysql.createConnection({
             host: process.env.DB_HOST,
             user: process.env.DB_USER,
@@ -37,14 +38,12 @@ class DB {
                 throw error;
             }
             else {
-                console.log('Selected ' + results.length + ' row(s).');
                 for (let i = 0; i < results.length; i++) {
-                    console.log(JSON.stringify(results[i]));
+                    this.sku = JSON.stringify(results[i]);
                 }
-                console.log('Done.');
             }
         });
-        return this.dbConnection;
+        return this.sku;
     }
 }
 exports.default = DB;

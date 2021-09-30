@@ -54,14 +54,42 @@ export default class Akeneo {
    * imports products into Akeneo.
    * */
   public async importProducts() {
+    const sku = {
+      "identifier": "sku-123",
+    }
     await axios.post(process.env.SERVER + '/api/rest/v1/products', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer' + this.accessToken,
         },
+      body: {
+          sku
+      }
       }).then((response: AxiosResponse) => {
         console.log(response.data);
       }).catch(error => console.log(error));
+  }
+
+  public async createProduct() {
+
+    const sku = {
+      "identifier": "sku-12333",
+    };
+
+    const config: any = {
+      method: 'post',
+      url: process.env.SERVER + '/api/rest/v1/products',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.accessToken,},
+      data : sku
+    };
+    axios(config)
+        .then(function (response: AxiosResponse) {
+          response.data;
+        }).catch(function (error) {
+          console.log(error);
+        });
   }
 
   /*
