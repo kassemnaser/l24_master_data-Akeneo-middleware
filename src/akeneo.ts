@@ -51,29 +51,27 @@ export default class Akeneo {
   }
 
   /**
-   * imports products into Akeneo.
+   * creates a new product in Akeneo
    * */
-  public async importProducts() {
-    const sku = {
-      "identifier": "sku-123",
-    }
-    await axios.post(process.env.SERVER + '/api/rest/v1/products', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer' + this.accessToken,
-        },
-      body: {
-          sku
-      }
-      }).then((response: AxiosResponse) => {
-        console.log(response.data);
-      }).catch(error => console.log(error));
-  }
-
   public async createProduct() {
 
     const sku = {
-      "identifier": "sku-12333",
+      "identifier": "Sku-123",
+      "enabled": true,
+      "family": null,
+      "categories": [],
+      "groups": [],
+      "parent": null,
+      "values": {
+        "name": [],
+        "description": [
+          {
+            "data": "Creat product",
+            "locale": "en_US",
+            "scope": "ecommerce"
+          }
+        ]
+      }
     };
 
     const config: any = {
@@ -92,25 +90,68 @@ export default class Akeneo {
         });
   }
 
-  /*
-    // updates the products in Akeneo.
-    public async updateProducts(){
-        console.log('updating the imported products');
-    }
-    */
+    /**
+     * updates the products in Akeneo.
+     * */
+  public async updateProduct(){
+    const sku = {
+      "identifier": "Sku-update",
+      "enabled": true,
+      "family": null,
+      "categories": [],
+      "groups": [],
+      "parent": null,
+      "values": {
+      "name": [],
+        "description": [
+          {
+            "data": "update the created product",
+            "locale": "en_US",
+            "scope": "ecommerce"
+          }
+        ]
+      }
+    };
 
-  /*
-    // deactivate the products in Akeneo.
-    public async deactivateProducts() {
-        const headers = {
-            'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.accessToken,
-        }
-        await axios.patch(process.env.SERVER + '/api/rest/v1/products/{}', headers, {
-            data: this.getProducts(),
-        }).then((response: AxiosResponse) => {
-            console.log(response.data);
-        }).catch(error => console.log(error));
-    }
-   */
+    const config: any = {
+    method: 'patch',
+    url: process.env.SERVER + '/api/rest/v1/products/1248',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.accessToken,
+    },
+    data : sku
+    };
+
+    axios(config).
+      then(response =>{
+      console.log(response.data);
+      }).catch(error => {
+      console.log(error);
+      });
+  }
+
+    /**
+     * deactivates the products in Akeneo.
+     * */
+  public async deactivateProduct() {
+
+    const config: any = {
+      method: 'delete',
+      url: process.env.SERVER + '/api/rest/v1/products/sku-update',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer Yjg2ZmM4YTAwNTE4NWEyMTVmZWVhZjA5MzRkMTgzYWIzZDc0Y2YyYzY4ZmRhZjVkMTJiMjUxNzQ3NDM0MDI3Yw'
+      }
+    };
+
+    axios(config)
+      .then(response => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
 }

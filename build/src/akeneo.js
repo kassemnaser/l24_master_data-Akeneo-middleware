@@ -81,6 +81,27 @@ class Akeneo {
             console.log(error);
         });
     }
+    // updates the products in Akeneo.
+    async updateProducts() {
+        const data = {
+            "identifier": "Sku-1234"
+        };
+        const config = {
+            method: 'patch',
+            url: 'http://10.0.55.77:8080/api/rest/v1/products/1248',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer MjViODFiN2EzYmYyOWZhNWZkMzMzNjU0MTM5NTg4YWQzNjVhZGNlNjA2OWMxNjg5Njc1ZGE2MWEyMTMxMWFjOA',
+            },
+            data: data
+        };
+        axios_1.default(config).
+            then(response => {
+            console.log(response.data);
+        }).catch(error => {
+            console.log(error);
+        });
+    }
 }
 exports.default = Akeneo;
 //# sourceMappingURL=akeneo.js.map
