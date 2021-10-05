@@ -9,8 +9,9 @@ const l24_master_dataFunc = async (req, res) => {
     const client = new akeneo_1.default();
     res.send(await client.authenticate());
     //res.send(await client.getProducts());
-    //res.send(await client.createProduct());
-    res.send(await client.updateProducts());
+    res.send(await client.createProduct());
+    //res.send(await client.updateProduct());
+    //res.send(await client.deactivateProduct());
 };
 exports.l24_master_dataFunc = l24_master_dataFunc;
 //# sourceMappingURL=index.js.map

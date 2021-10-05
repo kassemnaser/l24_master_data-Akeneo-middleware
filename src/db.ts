@@ -15,6 +15,7 @@ export default class DB {
       database: process.env.DB_DATABASE,
     });
     this.dbConnect();
+    this.readArticles();
   }
 
   /**
@@ -35,7 +36,7 @@ export default class DB {
    * reads articles from the view l24_pim_export
    */
   public readArticles() {
-    const sqlQuery = 'SELECT `l24-sku` FROM l24_pim_export limit 1';
+    const sqlQuery = 'SELECT `l24-sku` FROM l24_pim_export limit 5';
     this.dbConnection.query(sqlQuery, (error: Error, results: string[]) => {
       if (error) {
         throw error;

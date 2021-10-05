@@ -11,7 +11,7 @@ export const l24_master_dataFunc: HttpFunction = async (req: Request, res: Respo
   const client = new Akeneo();
   res.send(await client.authenticate());
   //res.send(await client.getProducts());
-  //res.send(await client.createProduct());
+  res.send(await client.createProduct());
   //res.send(await client.updateProduct());
   //res.send(await client.deactivateProduct());
 };

@@ -7,6 +7,7 @@ export default class Akeneo {
   public accessToken = '';
   private refreshToken = '';
   private expiresAt = 0;
+  myDb = new DB();
 
   constructor() {}
 

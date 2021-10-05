@@ -1,7 +1,9 @@
+import DB from './db';
 export default class Akeneo {
     accessToken: string;
     private refreshToken;
     private expiresAt;
+    myDb: DB;
     constructor();
     /**
      * authenticates to the Akeneo PIM.
@@ -12,9 +14,15 @@ export default class Akeneo {
      * */
     getProducts(): Promise<void>;
     /**
-     * imports products into Akeneo.
+     * creates a new product in Akeneo
      * */
-    importProducts(): Promise<void>;
     createProduct(): Promise<void>;
-    updateProducts(): Promise<void>;
+    /**
+     * updates the products in Akeneo.
+     * */
+    updateProduct(): Promise<void>;
+    /**
+     * deactivates the products in Akeneo.
+     * */
+    deactivateProduct(): Promise<void>;
 }

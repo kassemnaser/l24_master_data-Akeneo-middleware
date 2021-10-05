@@ -14,6 +14,7 @@ class DB {
             database: process.env.DB_DATABASE,
         });
         this.dbConnect();
+        this.readArticles();
     }
     /**
      * checks if the database connection is established.
@@ -32,7 +33,7 @@ class DB {
      * reads articles from the view l24_pim_export
      */
     readArticles() {
-        const sqlQuery = 'SELECT `l24-sku` FROM l24_pim_export limit 1';
+        const sqlQuery = 'SELECT `l24-sku` FROM l24_pim_export limit 5';
         this.dbConnection.query(sqlQuery, (error, results) => {
             if (error) {
                 throw error;
